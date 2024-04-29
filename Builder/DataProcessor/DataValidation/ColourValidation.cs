@@ -19,7 +19,7 @@ public class ColourValidation
 
 		// Return as string
         get {	
-			return _Colour.ToString(); 
+			return _Colour.ToString().ToLower(); 
 		}
 		// Validate before setting
         set {
@@ -30,7 +30,7 @@ public class ColourValidation
             }
             else
 			{
-				throw new ArgumentException("This colour has not been implemented.");
+				throw new ArgumentException("This colour has not yet been implemented.");
 			};	
 		}
 	}

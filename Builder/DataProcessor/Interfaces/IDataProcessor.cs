@@ -7,4 +7,5 @@ interface IDataProcessor
 
     // Must implement method to return the relevant data
     Data ReturnData();
+
 }
