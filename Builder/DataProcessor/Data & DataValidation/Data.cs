@@ -9,9 +9,9 @@ public class Data
     // For testing only
     public void ShowHeader()
     {
-        foreach (var row in Header!)
+        foreach (var value in Header!)
         {
-            Console.WriteLine(row);
+            Console.WriteLine(value);
         }
     }
     // For testing only

@@ -1,7 +1,8 @@
-﻿// Implement interface
+﻿using System;
+
+// Implement interface
 public class CSVDataReader: IDataReader
 {
-    // Create private property
     private Data _data = new();
 
     // Open file at filepath, to store in _data 
@@ -15,9 +16,8 @@ public class CSVDataReader: IDataReader
         string[] line;
         bool headerRow = true;
 
-        // Try except block
+        // Exception handling
         try {
-            // Equivalent of with open file as
             using (StreamReader reader = new(filePath))
             {
                 // While not EOF
