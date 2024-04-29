@@ -3,14 +3,27 @@
 public class Data
 {
 	// Store data
-	public List<string>? Rows { get; set; }
+    public string[]? Header {  get; set; }
+	public List<string[]>? Rows { get; set; }
 
-	// For testing
-	public void Show()
+    // For testing only
+    public void ShowHeader()
+    {
+        foreach (var row in Header!)
+        {
+            Console.WriteLine(row);
+        }
+    }
+    // For testing only
+    public void ShowData()
 	{
 		foreach (var row in Rows!)
 		{
-			Console.WriteLine(row);
+            foreach (string value in row) {
+                Console.Write(value);
+            }
+            // Flush
+            Console.WriteLine();
 		}
 	}
 }
