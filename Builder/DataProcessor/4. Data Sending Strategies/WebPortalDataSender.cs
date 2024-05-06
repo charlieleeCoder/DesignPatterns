@@ -1,8 +1,8 @@
 ﻿using System;
 
-public class WebPortalDataSender
+public class WebPortalDataSender: IDataSender
 {
-    public void SendData(string filePath)
+    public void SendData(string filePath, string endLocation)
     {
         // Create http connection
 

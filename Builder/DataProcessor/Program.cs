@@ -5,9 +5,9 @@
         static void Main(string[] args)
         {
             // Prompt for a colour arg
-            Console.WriteLine("Give me a colour.");
+            Console.WriteLine("Give me a colour: ");
 
-            // Must be a better way to ignore the null warning without changing to nullable type?
+            // Must be a better way to ignore the null warning
             string? input = Console.ReadLine();
             if (string.IsNullOrEmpty(input))
             {
@@ -22,6 +22,18 @@
 
             // We now have a validated colour
             string validColour = colourValidator.Colour;
+
+            // Now return builer of methods
+            SelectBuilder builderSelector = new(validColour);
+            IDataBuilder builderForColour = builderSelector.ReturnBuilder();
+
+            // Call composed methods
+            builderForColour.GetData();
+            builderForColour.ProcessData();
+            builderForColour.WriteData();
+            builderForColour.SendData();
+            builderForColour.ArchiveFiles();
+            
         }
     }
 }

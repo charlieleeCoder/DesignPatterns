@@ -18,11 +18,13 @@ public class ColourValidation
 	public string Colour {
 
 		// Return as string
-        get {	
+        get 
+		{	
 			return _Colour.ToString().ToLower(); 
 		}
 		// Validate before setting
-        set {
+        set 
+		{
 			// If the colour is a valid option, assign to _Colour
 			if (ValidColour.TryParse(value, true, out _Colour))
 			{

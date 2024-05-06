@@ -1,8 +1,8 @@
 ﻿using System;
 
-public class SFTPDataSender
+public class SFTPDataSender: IDataSender
 {
-	public void SendData(string filePath)
+	public void SendData(string filePath, string endLocation)
 	{
 		// Create SFTP connection
 

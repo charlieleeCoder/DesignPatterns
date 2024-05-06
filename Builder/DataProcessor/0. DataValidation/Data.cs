@@ -11,7 +11,9 @@ public class Data
     {
         foreach (var value in Header!)
         {
-            Console.WriteLine(value);
+            Console.Write($"{value},");
+            // Remove last comma, move to new line
+            Console.Write("\b\n");
         }
     }
     // For testing only
