@@ -1,52 +1,35 @@
-﻿using System;
+﻿using Reader;
+using Processor;
+using Writer;
+using Sender;
+using Archiver;
+using DocumentPipeline;
 
+namespace DataPipelineBuilder;
 public class BlueDataBuilder: IDataBuilder
 {
-	// Relevant strategies for Red implmentation
+	// Relevant strategies for Blue implementation
 	private IDataReader _dataReader = new ExcelDataReader();
 	private IDataProcessor _dataProcessor = new RemoveCancelled();
 	private IDataWriter _dataWriter = new ExcelWriter();
-	private IDataSender _dataSender = new EmailDataSender();
-	private IDataArchiver _dataArchiver = new SimpleDataArchiver();
+	private IFileSender _fileSender  = new EmailFileSender();
+	private IFileArchiver _fileArchiver = new SimpleFileArchiver();
 
-	// Return values from functions
-	private Data? _data;
-	private Data? _processedData;
-
-	// File path params
+	// Overarching approach param
 	private static string _colour = "Blue";
-	private string _startPath = $"../Colours/{_colour}/UnprocessedFiles";
-	private string _archivePath = $"../Colours/{_colour}/SentFiles";
-	private string _endLocation = $"../Colours/{_colour}/UnprocessedFiles";
 
-	// Set method to read initial file
-	public void GetData()
-	{
-		_data = _dataReader.GetData();
-	}
+	// Main call
+	public IDocumentPipeline Build(){
 
-	// Set data processing
-	public void ProcessData()
-	{
-		// Store and return
-		_processedData = _dataProcessor.ProcessData(_data!);
-	}
+		return new FullDocumentPipeline (
 
-	// Set writer
-	public void WriteData()
-	{
-		_dataWriter.WriteData(_processedData!);
-	}
+			colour: _colour,
+			dataReader: _dataReader,
+			dataProcessor: _dataProcessor,
+			dataWriter: _dataWriter,
+			fileSender: _fileSender,
+			fileArchiver: _fileArchiver
 
-	// Set send method
-	public void SendData(){
-		_dataSender.SendData(_startPath, _endLocation);
-	}
-
-	// Set archiver
-	public void ArchiveFiles(){
-
-		// TODO: Implement
-		Console.WriteLine(_archivePath);
+			);
 	}
 }

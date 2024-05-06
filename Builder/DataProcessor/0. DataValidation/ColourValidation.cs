@@ -1,9 +1,8 @@
-﻿using System;
-
-public class ColourValidation
+﻿namespace DataValidation;
+public class ValidatedColour
 {
 	// Define valid colours
-	private enum ValidColour
+	public enum ValidColour
 	{
 		red, 
 		green, 
@@ -11,27 +10,19 @@ public class ColourValidation
 		yellow
 	}
 
-	// Validated colour
-	private ValidColour _Colour;
-
-	// Ensure valid
+	private ValidColour _colour;
 	public string Colour {
 
-		// Return as string
-        get 
-		{	
-			return _Colour.ToString().ToLower(); 
+        get {	
+			return _colour.ToString().ToLower(); 
 		}
-		// Validate before setting
-        set 
-		{
-			// If the colour is a valid option, assign to _Colour
-			if (ValidColour.TryParse(value, true, out _Colour))
-			{
-                // Setting is done above with out.
+
+        set {
+			// If the colour is valid, assign to _colour
+			if (ValidColour.TryParse(value, true, out _colour)){
+                // Setting is done above 
             }
-            else
-			{
+            else {
 				throw new ArgumentException("This colour has not yet been implemented.");
 			};	
 		}

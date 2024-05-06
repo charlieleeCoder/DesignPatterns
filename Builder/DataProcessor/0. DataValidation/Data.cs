@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿namespace DataValidation;
 public class Data
 {
 	// Store data
@@ -17,12 +16,13 @@ public class Data
         }
     }
     // For testing only
-    public void ShowData()
+    public void ShowRows()
 	{
 		foreach (var row in Rows!)
 		{
-            foreach (string value in row) {
-                Console.Write(value);
+            foreach (string value in row) 
+            {
+                Console.Write($"{value},");
             }
             // Flush
             Console.WriteLine();

@@ -1,5 +1,6 @@
-﻿using System;
+﻿using DataValidation;
 
+namespace Reader;
 public class ExcelDataReader: IDataReader
 {
 	public void ReadData(string FilePath)

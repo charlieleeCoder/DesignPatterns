@@ -1,6 +1,8 @@
+using DataValidation;
+
+namespace Writer;
 public class CSVWriter: IDataWriter
 {
-    // 
     private string? _csvFilePath;
     private string? _csvArchivePath;
 
@@ -8,15 +10,5 @@ public class CSVWriter: IDataWriter
     public void WriteData(Data data)
     {
         // To implement
-    }
-
-    // Return file locations for processed and original docs
-    public string ReturnArchivedFilePath()
-    {
-        return _csvArchivePath!;
-    }
-    public string ReturnProcessedFilePath()
-    {
-        return _csvFilePath!;
     }
 }

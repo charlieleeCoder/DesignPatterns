@@ -1,6 +1,7 @@
-﻿using System;
+﻿using DataValidation;
 
-interface IDataReader
+namespace Reader;
+public interface IDataReader
 {
     // Must implement a method to read data, requiring filepath
     void ReadData(string filePath);

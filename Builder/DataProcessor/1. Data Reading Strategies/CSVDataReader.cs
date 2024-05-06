@@ -1,6 +1,6 @@
-﻿using System;
+﻿using DataValidation;
 
-// Implement interface
+namespace Reader;
 public class CSVDataReader: IDataReader
 {
     private Data _data = new();

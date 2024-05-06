@@ -1,8 +1,7 @@
-﻿using System;
-
-public class EmailDataSender: IDataSender
+﻿namespace Sender;
+public class EmailFileSender: IFileSender
 {
-    public void SendData(string filePath, string endLocation)
+    public void SendFile(string filePath, string endLocation)
     {
         // Select file
         if (File.Exists(filePath))

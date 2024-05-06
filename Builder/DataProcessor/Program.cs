@@ -1,4 +1,8 @@
-﻿namespace DataProcessor
+﻿using DataValidation;
+using DataPipelineBuilder;
+using DocumentPipeline;
+
+namespace DataProcessor
 {
     internal class Program
     {
@@ -15,7 +19,7 @@
             }
 
             // Set up colourValiation
-            var colourValidator = new ColourValidation()
+            var colourValidator = new ValidatedColour()
             {
                 Colour = input
             };
@@ -23,16 +27,17 @@
             // We now have a validated colour
             string validColour = colourValidator.Colour;
 
-            // Now return builer of methods
-            SelectBuilder builderSelector = new(validColour);
-            IDataBuilder builderForColour = builderSelector.ReturnBuilder();
+            // Now return builder
+            SelectBuilder builderContext = new(validColour);
+            IDataBuilder concreteBuilder = builderContext.ReturnBuilder();
+            IDocumentPipeline documentPipeline = concreteBuilder.Build();
 
             // Call composed methods
-            builderForColour.GetData();
-            builderForColour.ProcessData();
-            builderForColour.WriteData();
-            builderForColour.SendData();
-            builderForColour.ArchiveFiles();
+            documentPipeline.GetData();
+            documentPipeline.ProcessData();
+            documentPipeline.WriteData();
+            documentPipeline.SendFile();
+            documentPipeline.ArchiveFiles();
             
         }
     }
