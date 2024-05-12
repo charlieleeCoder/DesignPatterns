@@ -33,13 +33,23 @@ The genre is a story-driven RPG. The teenage protagonist Sinfjǫtli is initially
 
 ### 1.2 Core Concept
 
-Entirely 2D, the overhead world swaps to a front-on, timing-based battle system. This state trigger is reminiscent of the battle in Final Fantasy, but with real-time combat based on the swing, release and charge up of various weapons. 
+Entirely 2D, the overhead map transitions to a front-on, timing-based battle system. 
 
-Time it perfectly and the enemy is staggered, too late and you are instead. But don't attack too quickly and miss completely!
+Encounters are not random, as in Final Fantasy, with fast-paced, real-time combat based on the charge up, swing, and release of various weapons. 
+
+Time it perfectly and the enemy is staggered, too late and you are instead. 
 
 ### 1.3 Gameplay
 
-Different weapons have different charge up times. You can spam dagger attacks for constant damage, effective against hoardes of human enemies, but with little knock back, this becomes less effective against more powerful foes. Heavier swords and axes have significantly more wind up, but with much greater stagger as pay off.
+Different weapons have different charge up times and effects, lending themselves to different playstyles.
+
+You can spam dagger attacks, effective against hoardes of unarmoured enemies, but with little knock back, this becomes less effective against more powerful foes. Like other light-weight slash weapons, stacks well with poison.
+
+Axes and hammers have more wind up, but with much greater stagger as pay off. Particularly effective at disrupting power attacks.
+
+Bow and arrow is effective at a distance, stacks well with poison, or flames, but quick drawing takes constant practice. Heavy bows have a chance to stagger.
+
+Greatswords are the weapons of choice used by Sigmund. Spells and posion that of Queen Signy.
 
 But with limited skill points, and less money and favour, which weapons will and abilities will you choose to develop?
 
@@ -67,23 +77,29 @@ Non-Playable Characters:
 
 ### 1.5 Story
 
-Although working in software, my degree was in creative writing, speficially writing and directing theatre. Having said that, most of my performed plays were dark comedies, not historical, and this element has crept into the story slightly, if in a limited fashion.
+Although working in software, my degree was in creative writing, speficially writing and directing theatre. Most of my performed plays were dark comedies,  and this element has crept into the story slightly, in a limited fashion.
 
 The story beats are loosely inspired by the great *Saga of the Volsungs*, but artitistic liberties have been taken, primarily for the sake of expanding the tale as gamified story.
 
-Although I love storytelling, and my main aim was to create a fun, story-driven game, I am also aware that some people will skip through many scenes expanding on the worldbuilding. 
+Although I love storytelling, and my main aim was to create a fun, story-driven game, I am also aware that some people will skip through scenes expanding on the worldbuilding. 
 
 Dialogue *is* character, and there are thousands of lines of dialogue between the many characters, many of these optional, and this will be skippable; major scenes will have the option to save immediately afterwards to avoid hearing the same lines over and over again.
 
 ### 1.6 Software Architecture
 
-The initial plans for the architectural patterns are going to be viewable in the UML diagrams in this repo. This is likely to be on a tool other than Visio, primarily for cost reasons.
+**Overview**
 
-These may become out of date overtime, and as they exists primarily to help me plan the game, may only be updated periodically, not necessarily reflecting all the latest changes.
+I plan to create my own game engine for this specific combat style: partly to ensure I have full autonomy, partly to increase my familiarity with C#. 
 
-I plan to create my own game engine for this specific combat style, partly to ensure I have control over every element of the game, partly because I want to increase my familiarity with C#. As a side note, my previous games implemented in Python with a low level graphics framework called PyGame, rather than a bells-and-whistles engine like Unity, so I would prefer to design my own physics, collision detection, etc.
+As a side note, my previous games implemented in Python with a low level graphics framework called PyGame, rather than a bells-and-whistles engine like Unity, so I intend to design my own physics, collision detection, etc.
 
 This game will be designed with the graphics framework MonoGame. For the sake of learning, I also plan to write many of the same elements in Rust, although it's unlikely this version will be in the final game.
+
+**gameStateMachine**
+
+![gameStateMachine](./ClassDiagrams/gameStateMachine.png)
+
+
 
 ### 1.7 Strengths & Limitations
 
@@ -92,3 +108,4 @@ I have spent multiple years thinking about this particular story, what medium it
 Note: I am not an artist. I have never claimed to be, and after doing some 2D sprite design for an earlier game written in Python, I would say that my art will be placeholder at best. In some ways, this may oddly be an advantage. 
 
 Art is incredibly time consuming. And I know my strengths lie more in programming and storytelling. If I can get my game to feel fun with placeholder art, I'd love to bring in an artist later.
+
