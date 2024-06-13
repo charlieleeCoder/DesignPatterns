@@ -4,6 +4,6 @@ namespace Reader;
 public interface IDataReader
 {
     // Must implement a method to read data, requiring filepath
-    DataFrame ReadData(string filePath);
+    public DataFrame ReadData(string filePath);
 
 }
