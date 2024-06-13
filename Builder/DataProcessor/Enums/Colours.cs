@@ -14,4 +14,16 @@ namespace DataProcessor.Enums
         blue,
         yellow
     }
+
+    public static class ColoursDictionary
+    {
+        public static Dictionary<Colour, string> ColourLookup = new Dictionary<Colour, string>
+        {
+            { Colour.red, "Red" },
+            { Colour.green, "Green" },
+            { Colour.blue, "Blue" },
+            { Colour.yellow, "Yellow" }
+        };
+    }
+
 }
