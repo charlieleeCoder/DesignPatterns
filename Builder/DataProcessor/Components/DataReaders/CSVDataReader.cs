@@ -8,10 +8,8 @@ public class CSVDataReader: IDataReader
     // Open file at filepath, to store in _data 
     public DataFrame ReadData(string filePath)
     {
-        char seperator = ',';
-        bool header = true;
         Encoding encoding = Encoding.UTF8;
-        DataFrame _data = DataFrame.LoadCsv(filePath, seperator, header, encoding);
+        DataFrame _data = DataFrame.LoadCsv(filePath, encoding: encoding);
         return _data;
     }
 }
