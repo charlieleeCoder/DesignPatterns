@@ -1,15 +1,15 @@
 ﻿using DataProcessor.Enums;
-using Reader;
-using Processor;
-using Writer;
-using Sender;
-using Archiver;
+using DataProcessor.Components.DataReaders;
+using DataProcessor.Components.DataProccessors;
+using DataProcessor.Components.DataWriters;
+using DataProcessor.Components.FileSenders;
+using DataProcessor.Components.FileArchivers;
 using DataProcessor.DocumentPipeline;
 using DataProcessor.DocumentPipeline.Interface;
 using DataProcessor.Builder.Interface;
 
 namespace DataProcessor.Builder;
-public class FullDocumentPipelineBuilder : IDocumentPipelineBuilder
+public class DocumentPipelineBuilder : IDocumentPipelineBuilder
 {
     // Relevant strategies for Blue implementation
     private IDocumentPipeline _documentPipeline = new FullDocumentPipeline();

@@ -2,7 +2,12 @@ using System.Diagnostics;
 using System;
 using System.IO;
 
-namespace Archiver;
+namespace DataProcessor.Components.FileArchivers;
+
+public interface IFileArchiver 
+{
+    public void ArchiveFiles(string startFilePath, string archiveFilePath);
+}
 
 public class SimpleFileArchiver: IFileArchiver 
 {

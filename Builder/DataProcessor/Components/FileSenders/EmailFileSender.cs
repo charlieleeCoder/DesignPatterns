@@ -1,4 +1,4 @@
-﻿namespace Sender;
+﻿namespace DataProcessor.Components.FileSenders;
 public class EmailFileSender: IFileSender
 {
     public void SendFile(string filePath, string endLocation)

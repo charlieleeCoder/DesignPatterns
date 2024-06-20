@@ -1,8 +1,8 @@
 ﻿using Microsoft.Data.Analysis;
 using System.Text;
-using ClosedXML.Excel;
+// using ClosedXML.Excel;
 
-namespace Reader;
+namespace DataProcessor.Components.DataReaders;
 public class ExcelDataReader: IDataReader
 {
 	public DataFrame ReadData(string FilePath)

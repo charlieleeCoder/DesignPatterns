@@ -1,6 +1,6 @@
 using Microsoft.Data.Analysis;
 
-namespace Writer;
+namespace DataProcessor.Components.DataWriters;
 public class CSVWriter: IDataWriter
 {
     private string? _csvFilePath;

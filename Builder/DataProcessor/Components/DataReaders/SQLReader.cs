@@ -1,6 +1,6 @@
 ﻿using Microsoft.Data.Analysis;
 
-namespace Reader;
+namespace DataProcessor.Components.DataReaders;
 public class SQLReader: IDataReader
 {
     public DataFrame ReadData(string FilePath)

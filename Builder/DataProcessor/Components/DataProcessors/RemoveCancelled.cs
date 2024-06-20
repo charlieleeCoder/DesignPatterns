@@ -1,12 +1,21 @@
 using Microsoft.Data.Analysis;
 
-namespace Processor;
-class RemoveCancelled: IDataProcessor 
+namespace DataProcessor.Components.DataProccessors
 {
-    // Must implement method to return the relevant data
-    public DataFrame ProcessData(DataFrame data){
+    public interface IDataProcessor
+    {
+        // Must implement a method to process
+        public DataFrame ProcessData(DataFrame data);
+
+    }
+
+    class RemoveCancelled: IDataProcessor 
+    {
+        // Must implement method to return the relevant data
+        public DataFrame ProcessData(DataFrame data){
         
-        // To implement
-        return new DataFrame();
+            // To implement
+            return new DataFrame();
+        }
     }
 }

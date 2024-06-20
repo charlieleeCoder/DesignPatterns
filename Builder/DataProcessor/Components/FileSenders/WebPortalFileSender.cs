@@ -2,7 +2,7 @@
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.DevTools.V123.Network;
 
-namespace Sender;
+namespace DataProcessor.Components.FileSenders;
 public class WebPortalFileSender: IFileSender
 {
     public void SendFile(string filePath, string endLocation)
