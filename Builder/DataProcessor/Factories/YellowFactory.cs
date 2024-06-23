@@ -9,24 +9,23 @@ using Reader;
 using Sender;
 using Writer;
 
-namespace DataProcessor.Factories
+namespace DataProcessor.Factories;
+
+public class YellowFactory
 {
-    public class YellowFactory
+    private IDocumentPipelineBuilder YellowProductBuilder = new FullDocumentPipelineBuilder();
+
+    public IDocumentPipeline FactoryMethod()
     {
-        private IDocumentPipelineBuilder YellowProductBuilder = new FullDocumentPipelineBuilder();
+        FullDocumentPipeline RedPipeline = (FullDocumentPipeline)YellowProductBuilder.SetColour(Colour.yellow)
+                                                  .BuildDataReader(new CSVDataReader())
+                                                  .BuildDataProcessor(new RemoveCancelled())
+                                                  .BuildDataWriter(new CSVWriter())
+                                                  .BuildFileSender(new SFTPFileSender())
+                                                  .BuildFileArchiver(new SimpleFileArchiver())
+                                                  .Build();
 
-        public IDocumentPipeline FactoryMethod()
-        {
-            FullDocumentPipeline RedPipeline = (FullDocumentPipeline)YellowProductBuilder.SetColour(Colour.yellow)
-                                                      .BuildDataReader(new CSVDataReader())
-                                                      .BuildDataProcessor(new RemoveCancelled())
-                                                      .BuildDataWriter(new CSVWriter())
-                                                      .BuildFileSender(new SFTPFileSender())
-                                                      .BuildFileArchiver(new SimpleFileArchiver())
-                                                      .Build();
-
-            // Now return, fully built, to main
-            return RedPipeline;
-        }
+        // Now return, fully built, to main
+        return RedPipeline;
     }
 }

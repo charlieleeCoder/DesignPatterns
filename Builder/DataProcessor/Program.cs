@@ -1,8 +1,6 @@
 ﻿
 using DataProcessor.DocumentPipeline;
-using DataProcessor.DocumentPipeline.Interface;
 using DataProcessor.Factories;
-using DataProcessor.Factories.Interface;
 
 namespace DataProcessor
 {
