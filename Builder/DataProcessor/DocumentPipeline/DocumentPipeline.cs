@@ -45,9 +45,9 @@ public class DocumentPipeline : IDocumentPipeline
     private DataFrame? _currentData;
 
     // File path variables
-    public string? _startPath              { get; set; }
-    public string? _sendDestination        { get; set; }
-    public string? _archivePath            { get; set; }
+    public string? StartPath              { get; set; }
+    public string? SendDestination        { get; set; }
+    public string? ArchivePath            { get; set; }
 
     // Set method to read initial file
     public void ReadData()
@@ -58,12 +58,12 @@ public class DocumentPipeline : IDocumentPipeline
 			throw new NullReferenceException("No data reader has been sent.");
 		}
         // And args given
-        if (_startPath is null)
+        if (StartPath is null)
         {
             throw new NullReferenceException("No start filepath has been given.");
         }
 		// Store raw unprocessed data
-		_unprocessedData = DataReader.ReadData(_startPath);
+		_unprocessedData = DataReader.ReadData(StartPath);
         _currentData = _unprocessedData;
 	}
 
@@ -93,7 +93,11 @@ public class DocumentPipeline : IDocumentPipeline
         {
             throw new NullReferenceException("No data writer has been sent.");
         }
-        DataWriter.WriteData(_processedData!);
+        if (_currentData is null)
+        {
+            throw new NullReferenceException("No data has been read or processed to write.");
+        }
+        DataWriter.WriteData(_currentData);
 	}
 
 	// Call send method
@@ -104,8 +108,12 @@ public class DocumentPipeline : IDocumentPipeline
         {
             throw new NullReferenceException("No file sender has been sent.");
         }
-		FileSender.SendFile(_startPath!, _sendDestination!);
-	}
+        if (StartPath is null || SendDestination is null)
+        {
+            throw new NullReferenceException("Missing file path required to send file.");
+        }
+        FileSender.SendFile(StartPath, SendDestination);
+    }
 
 	// Call archiver
 	public void ArchiveFiles()
@@ -116,10 +124,10 @@ public class DocumentPipeline : IDocumentPipeline
             throw new NullReferenceException("No file archiver has been sent.");
         }
         // And we have required params
-        if (_startPath is null || _archivePath is null)
+        if (StartPath is null || ArchivePath is null)
         {
             throw new ArgumentException("We require filepaths to archive correct documents.");
         }
-        FileArchiver.ArchiveFiles(_startPath, _archivePath);
+        FileArchiver.ArchiveFiles(StartPath, ArchivePath);
 	}
 }
