@@ -11,7 +11,7 @@ namespace DataProcessor.Builder;
 // Interface
 public interface IDocumentPipelineBuilder
 {
-    public IDocumentPipelineBuilder SetColour(Colour colour);
+    public IDocumentPipelineBuilder SetCompany(Company company);
     public IDocumentPipelineBuilder BuildDataReader(IDataReader dataReader);
     public IDocumentPipelineBuilder BuildDataProcessor(IDataProcessor dataProcessor);
     public IDocumentPipelineBuilder BuildDataWriter(IDataWriter dataWriter);
@@ -28,9 +28,9 @@ public class DocumentPipelineBuilder : IDocumentPipelineBuilder
     private IDocumentPipeline _documentPipeline = new DocumentPipeline.DocumentPipeline();
 
     // Overarching approach param
-    public IDocumentPipelineBuilder SetColour(Colour colour)
+    public IDocumentPipelineBuilder SetCompany(Company company)
     {
-        _documentPipeline.Colour = colour;
+        _documentPipeline.Company = company;
         return this;
     }
 

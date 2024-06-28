@@ -13,7 +13,7 @@ public interface IDocumentPipeline
 {
 
     // Required properties
-    public Colour? Colour                   { get; set; }
+    public Company? Company                 { get; set; }
     public IDataReader? DataReader          { get; set; }
     public IDataProcessor? DataProcessor    { get; set; }
     public IDataWriter? DataWriter          { get; set; }
@@ -32,7 +32,7 @@ public class DocumentPipeline : IDocumentPipeline
 {
 
     // Implement interface
-    public Colour? Colour                  { get; set; }
+    public Company? Company                { get; set; }
     public IDataReader? DataReader         { get; set; }
     public IDataProcessor? DataProcessor   { get; set; }
     public IDataWriter? DataWriter         { get; set; }
