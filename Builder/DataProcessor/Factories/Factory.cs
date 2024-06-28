@@ -35,11 +35,11 @@ public class Factory : IFactory
         };
 
         IDocumentPipeline Pipeline = Builder.SetColour(Colour)
-                                    .BuildDataReader((IDataReader)Activator.CreateInstance(Strategy.Reader))
-                                    .BuildDataProcessor((IDataProcessor)Activator.CreateInstance(Strategy.Processor))
-                                    .BuildDataWriter((IDataWriter)Activator.CreateInstance(Strategy.Writer))
-                                    .BuildFileSender((IFileSender)Activator.CreateInstance(Strategy.Sender))
-                                    .BuildFileArchiver((IFileArchiver)Activator.CreateInstance(Strategy.Archiver))
+                                    .BuildDataReader((IDataReader)Activator.CreateInstance(Strategy.Reader)!)
+                                    .BuildDataProcessor((IDataProcessor)Activator.CreateInstance(Strategy.Processor)!)
+                                    .BuildDataWriter((IDataWriter)Activator.CreateInstance(Strategy.Writer)!)
+                                    .BuildFileSender((IFileSender)Activator.CreateInstance(Strategy.Sender)!)
+                                    .BuildFileArchiver((IFileArchiver)Activator.CreateInstance(Strategy.Archiver)!)
                                     .Build();
 
         // now return, fully built, to main
