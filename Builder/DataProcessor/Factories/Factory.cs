@@ -7,6 +7,7 @@ using DataProcessor.Components.DataProcessors;
 using DataProcessor.Components.DataWriters;
 using DataProcessor.Components.FileSenders;
 using DataProcessor.Components.FileArchivers;
+using DataProcessor.FileLocations;
 
 namespace DataProcessor.Factories;
 
@@ -25,6 +26,8 @@ public class Factory : IFactory
 
     public IDocumentPipeline FactoryMethod()
     {
+        
+        // Get strategy
         BaseStrategy Strategy = Company switch
         {
             Company.MuffinsMuffins  => new ProcessedCSVSentByEmail(),
@@ -34,7 +37,18 @@ public class Factory : IFactory
             _                       => throw new NotImplementedException()
         };
 
+        // Relevant filepaths
+        IFileLocations filePaths = Company switch
+        {
+            Company.MuffinsMuffins  => new MuffinsMuffinsFiles(),
+            Company.NotRealLtd      => new NotRealLtdFiles(),
+            Company.MadeUpCo        => new MadeUpCoFiles(),
+            Company.NotGenericCo    => new NotGenericCoFiles(),
+            _                       => throw new NotImplementedException()
+        };
+
         IDocumentPipeline Pipeline = Builder.SetCompany(Company)
+                                    .SetFileLocations(filePaths)
                                     .BuildDataReader((IDataReader)Activator.CreateInstance(Strategy.Reader)!)
                                     .BuildDataProcessor((IDataProcessor)Activator.CreateInstance(Strategy.Processor)!)
                                     .BuildDataWriter((IDataWriter)Activator.CreateInstance(Strategy.Writer)!)

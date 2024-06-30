@@ -4,6 +4,7 @@ using DataProcessor.Components.DataProcessors;
 using DataProcessor.Components.DataWriters;
 using DataProcessor.Components.FileSenders;
 using DataProcessor.Components.FileArchivers;
+using DataProcessor.Components.FileLocations;
 using DataProcessor.DocumentPipeline;
 
 namespace DataProcessor.Builder;
@@ -12,6 +13,7 @@ namespace DataProcessor.Builder;
 public interface IDocumentPipelineBuilder
 {
     public IDocumentPipelineBuilder SetCompany(Company company);
+    public IDocumentPipelineBuilder SetFileLocations(IFileLocations fileLocations);
     public IDocumentPipelineBuilder BuildDataReader(IDataReader dataReader);
     public IDocumentPipelineBuilder BuildDataProcessor(IDataProcessor dataProcessor);
     public IDocumentPipelineBuilder BuildDataWriter(IDataWriter dataWriter);
@@ -31,6 +33,13 @@ public class DocumentPipelineBuilder : IDocumentPipelineBuilder
     public IDocumentPipelineBuilder SetCompany(Company company)
     {
         _documentPipeline.Company = company;
+        return this;
+    }
+
+    // Overarching approach param
+    public IDocumentPipelineBuilder SetFileLocations(IFileLocations fileLocations)
+    {
+        _documentPipeline.FileLocations = fileLocations;
         return this;
     }
 
