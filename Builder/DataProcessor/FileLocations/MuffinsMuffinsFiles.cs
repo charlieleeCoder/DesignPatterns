@@ -5,11 +5,20 @@ namespace DataProcessor.FileLocations;
 public class MuffinsMuffinsFiles : BaseFileLocations
 {
 
-    public MuffinsMuffinsFiles(Company company, Report report) : base(company, report)
+    public MuffinsMuffinsFiles(Report report) : base(Company.MuffinsMuffins, report)
     {
+        // Reading
+        StartingFileExtension = ".csv";
 
-        Company = Company.MuffinsMuffins;
+        // Processing & Writing
+        ProcessingFileExtension = ".csv";
+
+        // Sending
         DestinationLocation = $"madeupemail@{CompanyName}.com";
+
+        // Archiving
+        ArchiveOriginalFileExtension = StartingFileExtension;
+        ArchiveSentFileExtension = ProcessingFileExtension;
     }
 
 }

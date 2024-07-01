@@ -5,20 +5,20 @@ namespace DataProcessor.FileLocations;
 public class MadeUpCoFiles : BaseFileLocations
 {
 
-    public MadeUpCoFiles(Company company, Report report) : base(company, report)
+    public MadeUpCoFiles(Report report) : base(Company.MadeUpCo, report)
     {
-
+        // Reading
         StartingFileExtension = ".csv";
 
         // Processing & Writing
-        ProcessingFileLocation = $".\\{CompanyName}\\{ReportName}\\Processing\\";
-        ProcessingFileName = "";
+        ProcessingFileExtension = ".xlsx";
 
         // Sending
         DestinationLocation = "sftp example@255.255.0.1";
 
-        // Archiving
-        ArchiveFileLocation = $".\\{CompanyName}\\{ReportName}\\Archive\\";
+        // Arhive
+        ArchiveOriginalFileExtension = StartingFileExtension;
+        ArchiveSentFileExtension = ProcessingFileExtension;
 
     }
 

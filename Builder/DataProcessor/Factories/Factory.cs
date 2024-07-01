@@ -1,7 +1,7 @@
 ﻿using DataProcessor.Enums;
 using DataProcessor.Builder;
 using DataProcessor.DocumentPipeline;
-using DataProcessor.Strategies;
+using DataProcessor.ComponentStrategies;
 using DataProcessor.Components.DataReaders;
 using DataProcessor.Components.DataProcessors;
 using DataProcessor.Components.DataWriters;
@@ -14,7 +14,8 @@ namespace DataProcessor.Factories;
 public interface IFactory
 {
     public Company Company { get; set; }
-    public IDocumentPipeline FactoryMethod();
+    public Report Report { get; set; }
+    public IDocumentPipeline ReturnDocumentPipeline();
 }
 
 public class Factory : IFactory
@@ -22,13 +23,23 @@ public class Factory : IFactory
 
     private IDocumentPipelineBuilder Builder = new DocumentPipelineBuilder();
 
-    public Company Company { get; set; }
+    // Need setting
+    public Company Company  { get; set; }
+    public Report Report    { get; set; }
 
-    public IDocumentPipeline FactoryMethod()
+    // Constructor
+    Factory(Company company, Report report)
+    {
+        Company = company;
+        Report = report;
+    }
+
+    // Factory Method
+    public IDocumentPipeline ReturnDocumentPipeline()
     {
         
         // Get strategy
-        BaseStrategy Strategy = Company switch
+        BaseComponentStrategy Strategy = Company switch
         {
             Company.MuffinsMuffins  => new ProcessedCSVSentByEmail(),
             Company.NotRealLtd      => new UnprocessedExcelSentViaSFTP(),
@@ -38,17 +49,12 @@ public class Factory : IFactory
         };
 
         // Relevant filepaths
-        IFileLocations filePaths = Company switch
-        {
-            Company.MuffinsMuffins  => new MuffinsMuffinsFiles(Company.MuffinsMuffins, Report.Invoice),
-            Company.NotRealLtd      => new NotRealLtdFiles(Company.NotRealLtd, Report.BoardReport),
-            Company.MadeUpCo        => new MadeUpCoFiles(Company.MadeUpCo, Report.Accounting),
-            Company.NotGenericCo    => new NotGenericCoFiles(Company.NotGenericCo, Report.Operations),
-            _                       => throw new NotImplementedException()
-        };
+        IFilePathContext FilePathContext = new FilePathContext();
+        IFileLocations FilePaths = FilePathContext.ReturnFileLocations(Report, Company);
 
+        // Create pipeline
         IDocumentPipeline Pipeline = Builder.SetCompany(Company)
-                                    .SetFileLocations(filePaths)
+                                    .SetFileLocations(FilePaths)
                                     .BuildDataReader((IDataReader)Activator.CreateInstance(Strategy.Reader)!)
                                     .BuildDataProcessor((IDataProcessor)Activator.CreateInstance(Strategy.Processor)!)
                                     .BuildDataWriter((IDataWriter)Activator.CreateInstance(Strategy.Writer)!)
@@ -56,7 +62,7 @@ public class Factory : IFactory
                                     .BuildFileArchiver((IFileArchiver)Activator.CreateInstance(Strategy.Archiver)!)
                                     .Build();
 
-        // now return, fully built, to main
+        // Now return, fully-built, to main
         return Pipeline;
     }
 }

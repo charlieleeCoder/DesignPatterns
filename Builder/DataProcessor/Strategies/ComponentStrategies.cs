@@ -5,18 +5,18 @@ using DataProcessor.Components.FileArchivers;
 using DataProcessor.Components.FileSenders;
 using DataProcessor.Enums;
 
-namespace DataProcessor.Strategies;
+namespace DataProcessor.ComponentStrategies;
 
-public abstract class BaseStrategy
+public abstract class BaseComponentStrategy
 {
-    public Type Reader      { get; set; } = default!;
-    public Type Processor   { get; set; } = default!;
-    public Type Writer      { get; set; } = default!;
-    public Type Sender      { get; set; } = default!;
-    public Type Archiver    { get; set; } = default!;
+    public Type Reader          { get; set; } = default!;
+    public Type Processor       { get; set; } = default!;
+    public Type Writer          { get; set; } = default!;
+    public Type Sender          { get; set; } = default!;
+    public Type Archiver        { get; set; } = default!;
 }
 
-public class ProcessedCSVSentByEmail: BaseStrategy
+public class ProcessedCSVSentByEmail: BaseComponentStrategy
 {
     public new Type Reader      { get; set; } = typeof(CSVDataReader);
     public new Type Processor   { get; set; } = typeof(RemoveCancelled);
@@ -25,7 +25,7 @@ public class ProcessedCSVSentByEmail: BaseStrategy
     public new Type Archiver    { get; set; } = typeof(SimpleFileArchiver);
 }
 
-public class UnprocessedCSVSentByWebDriver : BaseStrategy
+public class UnprocessedCSVSentByWebDriver : BaseComponentStrategy
 {
     public new Type Reader      { get; set; } = typeof(CSVDataReader);
     public new Type Processor   { get; set; } = typeof(RemoveCancelled);
@@ -34,7 +34,7 @@ public class UnprocessedCSVSentByWebDriver : BaseStrategy
     public new Type Archiver    { get; set; } = typeof(SimpleFileArchiver);
 }
 
-public class UnprocessedExcelSentViaSFTP: BaseStrategy
+public class UnprocessedExcelSentViaSFTP: BaseComponentStrategy
 {
     public new Type Reader      { get; set; } = typeof(ExcelDataReader);
     public new Type Processor   { get; set; } = typeof(UnProcessed);
@@ -43,7 +43,7 @@ public class UnprocessedExcelSentViaSFTP: BaseStrategy
     public new Type Archiver    { get; set; } = typeof(SimpleFileArchiver);
 }
 
-public class ProcessedCSVConvertedtoExcelSentViaSFTP : BaseStrategy
+public class ProcessedCSVConvertedtoExcelSentViaSFTP : BaseComponentStrategy
 {
     public new Type Reader      { get; set; } = typeof(CSVDataReader);
     public new Type Processor   { get; set; } = typeof(RemoveCancelled);

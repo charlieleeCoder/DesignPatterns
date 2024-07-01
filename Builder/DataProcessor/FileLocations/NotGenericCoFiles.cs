@@ -5,11 +5,20 @@ namespace DataProcessor.FileLocations;
 public class NotGenericCoFiles : BaseFileLocations
 {
 
-    public NotGenericCoFiles(Company company, Report report) : base(company, report)
+    public NotGenericCoFiles(Report report) : base(Company.NotGenericCo, report)
     {
+        // Reading
+        StartingFileExtension = ".csv";
 
+        // Processing & Writing
+        ProcessingFileExtension = ".csv";
+
+        // Sending
         DestinationLocation = $"www.{CompanyName}.com/upload_files/";
 
+        // Archiving
+        ArchiveOriginalFileExtension = StartingFileExtension;
+        ArchiveSentFileExtension = ProcessingFileExtension;
     }
 
 }
