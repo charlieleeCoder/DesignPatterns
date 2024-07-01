@@ -6,32 +6,32 @@ public interface IFileLocations
 {
     
     // Meta info
-    public Company Company                      { get; set; }
-    public string CompanyName                   { get; set; }
-    public Report Report                        { get; set; }
-    public string ReportName                    { get; set; }
+    public Company Company                      { get; protected set; }
+    public string CompanyName                   { get; protected set; }
+    public Report Report                        { get; protected set; }
+    public string ReportName                    { get; protected set; }
 
     // Root
-    public string RootFolder                    { get; set; }
+    public string RootFolder                    { get; protected set; }
 
     // Start Folder & Filename
-    public string StartingFileLocation          { get; set; }
-    public string StartingFileName              { get; set; }
-    public string StartingFileExtension         { get; set; }
+    public string StartingFileLocation          { get; protected set; }
+    public string StartingFileName              { get; protected set; }
+    public string StartingFileExtension         { get; protected set; }
 
     // Processing & Writing
-    public string ProcessingFileLocation        { get; set; }
-    public string ProcessingFileName            { get; set; }
-    public string ProcessingFileExtension       { get; set; }
+    public string ProcessingFileLocation        { get; protected set; }
+    public string ProcessingFileName            { get; protected set; }
+    public string ProcessingFileExtension       { get; protected set; }
 
     // Sending
-    public string DestinationLocation           { get; set; }
+    public string DestinationLocation           { get; protected set; }
 
     // Archiving
-    public string ArchiveFileLocation           { get; set; }
-    public string ArchiveSentFileName           { get; set; }
-    public string ArchiveSentFileExtension      { get; set; }
-    public string ArchiveOriginalFileName       { get; set; }
-    public string ArchiveOriginalFileExtension  { get; set; }
+    public string ArchiveFileLocation           { get; protected set; }
+    public string ArchiveSentFileName           { get; protected set; }
+    public string ArchiveSentFileExtension      { get; protected set; }
+    public string ArchiveOriginalFileName       { get; protected set; }
+    public string ArchiveOriginalFileExtension  { get; protected set; }
 
 }

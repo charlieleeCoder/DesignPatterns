@@ -61,7 +61,7 @@ public class DocumentPipeline : IDocumentPipeline
             throw new NullReferenceException("No start filepath has been given.");
         }
 		// Store raw unprocessed data
-		_unprocessedData = DataReader.ReadData(FileLocations.StartingFileLocation);
+		_unprocessedData = DataReader.ReadData(FileLocations);
         _currentData = _unprocessedData;
 	}
 
@@ -99,7 +99,7 @@ public class DocumentPipeline : IDocumentPipeline
         {
             throw new NullReferenceException("No file location set to write to.");
         }
-        DataWriter.WriteData(_currentData, FileLocations.ProcessingFileLocation);
+        DataWriter.WriteData(_currentData, FileLocations);
 	}
 
 	// Call send method
@@ -114,7 +114,7 @@ public class DocumentPipeline : IDocumentPipeline
         {
             throw new NullReferenceException("Missing file path required to send file.");
         }
-        FileSender.SendFile(FileLocations.StartingFileLocation, FileLocations.DestinationLocation);
+        FileSender.SendFile(FileLocations);
     }
 
 	// Call archiver

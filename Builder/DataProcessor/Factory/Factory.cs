@@ -1,16 +1,11 @@
 ﻿using DataProcessor.Enums;
 using DataProcessor.Builder;
 using DataProcessor.DocumentPipeline;
-using DataProcessor.ComponentStrategies;
-using DataProcessor.Components.DataReaders;
-using DataProcessor.Components.DataProcessors;
-using DataProcessor.Components.DataWriters;
-using DataProcessor.Components.FileSenders;
-using DataProcessor.Components.FileArchivers;
+using DataProcessor.ComponentsRequired;
 using DataProcessor.FileLocations;
 using DataProcessor.Strategies;
 
-namespace DataProcessor.Factories;
+namespace DataProcessor.Factory;
 
 public interface IFactory
 {
@@ -38,29 +33,34 @@ public class Factory : IFactory
     // Factory Method
     public IDocumentPipeline ReturnDocumentPipeline()
     {
-        
+
         // Get strategy
-        BaseComponentStrategy Strategy = Company switch
+        BaseComponentsRequired Strategy = Company switch
         {
-            Company.MuffinsMuffins  => new ProcessedCSVSentByEmail(),
-            Company.NotRealLtd      => new UnprocessedExcelSentViaSFTP(),
+            Company.MuffinsMuffins  => new UnprocessedCSVSentByEmail(),
+            Company.NotRealLtd      => new ProcessedExcelSentViaSFTP(),
             Company.MadeUpCo        => new ProcessedCSVConvertedtoExcelSentViaSFTP(),
             Company.NotGenericCo    => new UnprocessedCSVSentByWebDriver(),
             _                       => throw new NotImplementedException()
         };
 
+        Console.WriteLine(Strategy.ToString());
+
         // Relevant filepaths
         IFilePathContext FilePathContext = new FilePathContext();
         IFileLocations FilePaths = FilePathContext.ReturnFileLocations(Company, Report);
 
+        Console.WriteLine(Company);
+        Console.WriteLine(Report);
+
         // Create pipeline
         IDocumentPipeline Pipeline = Builder.SetCompany(Company)
                                     .SetFileLocations(FilePaths)
-                                    .BuildDataReader((IDataReader)Activator.CreateInstance(Strategy.Reader)!)
-                                    .BuildDataProcessor((IDataProcessor)Activator.CreateInstance(Strategy.Processor)!)
-                                    .BuildDataWriter((IDataWriter)Activator.CreateInstance(Strategy.Writer)!)
-                                    .BuildFileSender((IFileSender)Activator.CreateInstance(Strategy.Sender)!)
-                                    .BuildFileArchiver((IFileArchiver)Activator.CreateInstance(Strategy.Archiver)!)
+                                    .BuildDataReader(Strategy.Reader)
+                                    .BuildDataProcessor(Strategy.Processor)
+                                    .BuildDataWriter(Strategy.Writer)
+                                    //.BuildFileSender((IFileSender)Activator.CreateInstance(Strategy.Sender)!)
+                                    //.BuildFileArchiver((IFileArchiver)Activator.CreateInstance(Strategy.Archiver)!)
                                     .Build();
 
         // Now return, fully-built, to main

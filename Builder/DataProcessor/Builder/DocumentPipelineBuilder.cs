@@ -81,11 +81,19 @@ public class DocumentPipelineBuilder : IDocumentPipelineBuilder
     // Main call
     public IDocumentPipeline Build()
     {
+        if (_documentPipeline == null)
+        {
+            throw new NullReferenceException("No document pipeline exists.");
+        }
+        
         // Asign temp var
         IDocumentPipeline _temp = _documentPipeline;
 
         // Create a new ref
         Reset();
+
+        // Test
+        Console.WriteLine(_temp);
 
         // Return local variable
         return _temp!;

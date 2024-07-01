@@ -1,16 +1,18 @@
-﻿namespace DataProcessor.Components.FileSenders;
+﻿using DataProcessor.FileLocations;
+
+namespace DataProcessor.Components.FileSenders;
 public class EmailFileSender: IFileSender
 {
-    public void SendFile(string filePath, string endLocation)
+    public void SendFile(IFileLocations fileLocations)
     {
-        // Select file
-        if (File.Exists(filePath))
-        {
-
-        }
-        else
-        {
-            throw new ArgumentException($"File does not exist at {filePath}");
-        }
+        //// Select file
+        //if (File.Exists(fileLocations.))
+        //{
+            
+        //}
+        //else
+        //{
+        //    throw new ArgumentException($"File does not exist at {fileLocations.}");
+        //}
     }
 }
