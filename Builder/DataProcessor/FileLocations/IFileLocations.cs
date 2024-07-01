@@ -11,6 +11,9 @@ public interface IFileLocations
     public Report Report                        { get; set; }
     public string ReportName                    { get; set; }
 
+    // Root
+    public string RootFolder                    { get; set; }
+
     // Start Folder & Filename
     public string StartingFileLocation          { get; set; }
     public string StartingFileName              { get; set; }

@@ -5,7 +5,7 @@ using System.Text;
 namespace DataProcessor.Components.DataReaders;
 public class ExcelDataReader: IDataReader
 {
-	public DataFrame ReadData(string FilePath)
+	public DataFrame ReadData(string filePath)
 	{
         // TODO: implement. Need to find relevant libraries.
 

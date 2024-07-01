@@ -48,11 +48,11 @@ public class SimpleFileArchiver: IFileArchiver
     {
 
         FileFormat format = GetFileFormat(fileName);
-        
+
         return fileType switch
         {
             FileType.starting => "ORIGINAL",
             FileType.processing => "SENT"
-        }
+        };
     }
 }

@@ -11,6 +11,9 @@ public abstract class BaseFileLocations : IFileLocations
     public Report Report                    { get; set; }
     public string ReportName                { get; set; }
 
+    // Root
+    public string RootFolder                { get; set; }
+
     // Start Folder & Filename
     public string StartingFileLocation      { get; set; }
     public string StartingFileName          { get; set; }
@@ -40,16 +43,18 @@ public abstract class BaseFileLocations : IFileLocations
         Report = report;
         ReportName = ReportsDictionary.ReportsLookup[Report];
 
+        RootFolder = "C:\\FakeData";
+
         // Starting
-        StartingFileLocation = $".\\{CompanyName}\\{ReportName}\\OriginalOutput\\";
+        StartingFileLocation = $"{RootFolder}\\{CompanyName}\\{ReportName}\\OriginalOutput\\";
         StartingFileName = $"{ReportName}";
 
         // Processing & Writing
-        ProcessingFileLocation = $".\\{CompanyName}\\{ReportName}\\Processing\\";
+        ProcessingFileLocation = $"{RootFolder}\\{CompanyName}\\{ReportName}\\Processing\\";
         ProcessingFileName = $"{ReportName} - PROCESSING";
 
         // Archiving
-        ArchiveFileLocation = $".\\{CompanyName}\\{ReportName}\\Archive\\";
+        ArchiveFileLocation = $"{RootFolder}\\{CompanyName}\\{ReportName}\\Archive\\";
         ArchiveSentFileName = $"{ReportName} - SENT";
         ArchiveOriginalFileName = $"{ReportName} - ORIGINAL";
     }
