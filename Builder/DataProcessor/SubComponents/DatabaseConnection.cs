@@ -1,7 +1,11 @@
-﻿
-namespace DataProcessor.SubComponents
+﻿namespace DataProcessor.SubComponents;
+
+public class DatabaseConnection
 {
-    internal class DatabaseConnection
+    public void Connect() 
     {
+        // Placeholder
+        Console.WriteLine("Placeholder.");
     }
 }
+

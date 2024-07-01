@@ -6,6 +6,7 @@ using DataProcessor.Components.DataProcessors;
 using DataProcessor.Components.DataWriters;
 using DataProcessor.Components.FileSenders;
 using DataProcessor.Components.FileArchivers;
+using DataProcessor.FileLocations;
 
 namespace DataProcessor.DocumentPipeline;
 
@@ -13,12 +14,13 @@ public interface IDocumentPipeline
 {
 
     // Required properties
-    public Colour? Colour                   { get; set; }
+    public Company? Company                 { get; set; }
     public IDataReader? DataReader          { get; set; }
     public IDataProcessor? DataProcessor    { get; set; }
     public IDataWriter? DataWriter          { get; set; }
     public IFileSender? FileSender          { get; set; }
     public IFileArchiver? FileArchiver      { get; set; }
+    public IFileLocations? FileLocations    { get; set; }
 
     // Required methods
     public void ReadData();
@@ -32,7 +34,8 @@ public class DocumentPipeline : IDocumentPipeline
 {
 
     // Implement interface
-    public Colour? Colour                  { get; set; }
+    public Company? Company                { get; set; }
+    public IFileLocations? FileLocations   { get; set; }
     public IDataReader? DataReader         { get; set; }
     public IDataProcessor? DataProcessor   { get; set; }
     public IDataWriter? DataWriter         { get; set; }
@@ -44,11 +47,6 @@ public class DocumentPipeline : IDocumentPipeline
 	private DataFrame? _processedData;
     private DataFrame? _currentData;
 
-    // File path variables
-    public string? StartPath              { get; set; }
-    public string? SendDestination        { get; set; }
-    public string? ArchivePath            { get; set; }
-
     // Set method to read initial file
     public void ReadData()
 	{
@@ -58,12 +56,12 @@ public class DocumentPipeline : IDocumentPipeline
 			throw new NullReferenceException("No data reader has been sent.");
 		}
         // And args given
-        if (StartPath is null)
+        if (FileLocations is null)
         {
             throw new NullReferenceException("No start filepath has been given.");
         }
 		// Store raw unprocessed data
-		_unprocessedData = DataReader.ReadData(StartPath);
+		_unprocessedData = DataReader.ReadData(FileLocations.StartingFileLocation);
         _currentData = _unprocessedData;
 	}
 
@@ -97,7 +95,11 @@ public class DocumentPipeline : IDocumentPipeline
         {
             throw new NullReferenceException("No data has been read or processed to write.");
         }
-        DataWriter.WriteData(_currentData);
+        if (FileLocations is null)
+        {
+            throw new NullReferenceException("No file location set to write to.");
+        }
+        DataWriter.WriteData(_currentData, FileLocations.ProcessingFileLocation);
 	}
 
 	// Call send method
@@ -108,11 +110,11 @@ public class DocumentPipeline : IDocumentPipeline
         {
             throw new NullReferenceException("No file sender has been sent.");
         }
-        if (StartPath is null || SendDestination is null)
+        if (FileLocations is null)
         {
             throw new NullReferenceException("Missing file path required to send file.");
         }
-        FileSender.SendFile(StartPath, SendDestination);
+        FileSender.SendFile(FileLocations.StartingFileLocation, FileLocations.DestinationLocation);
     }
 
 	// Call archiver
@@ -124,10 +126,10 @@ public class DocumentPipeline : IDocumentPipeline
             throw new NullReferenceException("No file archiver has been sent.");
         }
         // And we have required params
-        if (StartPath is null || ArchivePath is null)
+        if (FileLocations is null)
         {
             throw new ArgumentException("We require filepaths to archive correct documents.");
         }
-        FileArchiver.ArchiveFiles(StartPath, ArchivePath);
+        FileArchiver.ArchiveFiles(FileLocations);
 	}
 }

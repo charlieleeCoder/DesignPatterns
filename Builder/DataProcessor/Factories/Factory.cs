@@ -7,12 +7,13 @@ using DataProcessor.Components.DataProcessors;
 using DataProcessor.Components.DataWriters;
 using DataProcessor.Components.FileSenders;
 using DataProcessor.Components.FileArchivers;
+using DataProcessor.FileLocations;
 
 namespace DataProcessor.Factories;
 
 public interface IFactory
 {
-    public Colour Colour { get; set; }
+    public Company Company { get; set; }
     public IDocumentPipeline FactoryMethod();
 }
 
@@ -21,20 +22,33 @@ public class Factory : IFactory
 
     private IDocumentPipelineBuilder Builder = new DocumentPipelineBuilder();
 
-    public Colour Colour { get; set; }
+    public Company Company { get; set; }
 
     public IDocumentPipeline FactoryMethod()
     {
-        BaseStrategy Strategy = Colour switch
+        
+        // Get strategy
+        BaseStrategy Strategy = Company switch
         {
-            Colour.blue => new BlueStrategy(),
-            Colour.green => new GreenStrategy(),
-            Colour.red => new RedStrategy(),
-            Colour.yellow => new YellowStrategy(),
-            _ => throw new NotImplementedException()
+            Company.MuffinsMuffins  => new ProcessedCSVSentByEmail(),
+            Company.NotRealLtd      => new UnprocessedExcelSentViaSFTP(),
+            Company.MadeUpCo        => new ProcessedCSVConvertedtoExcelSentViaSFTP(),
+            Company.NotGenericCo    => new UnprocessedCSVSentByWebDriver(),
+            _                       => throw new NotImplementedException()
         };
 
-        IDocumentPipeline Pipeline = Builder.SetColour(Colour)
+        // Relevant filepaths
+        IFileLocations filePaths = Company switch
+        {
+            Company.MuffinsMuffins  => new MuffinsMuffinsFiles(),
+            Company.NotRealLtd      => new NotRealLtdFiles(),
+            Company.MadeUpCo        => new MadeUpCoFiles(),
+            Company.NotGenericCo    => new NotGenericCoFiles(),
+            _                       => throw new NotImplementedException()
+        };
+
+        IDocumentPipeline Pipeline = Builder.SetCompany(Company)
+                                    .SetFileLocations(filePaths)
                                     .BuildDataReader((IDataReader)Activator.CreateInstance(Strategy.Reader)!)
                                     .BuildDataProcessor((IDataProcessor)Activator.CreateInstance(Strategy.Processor)!)
                                     .BuildDataWriter((IDataWriter)Activator.CreateInstance(Strategy.Writer)!)

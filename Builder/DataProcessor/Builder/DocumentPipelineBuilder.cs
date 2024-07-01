@@ -4,6 +4,7 @@ using DataProcessor.Components.DataProcessors;
 using DataProcessor.Components.DataWriters;
 using DataProcessor.Components.FileSenders;
 using DataProcessor.Components.FileArchivers;
+using DataProcessor.Components.FileLocations;
 using DataProcessor.DocumentPipeline;
 
 namespace DataProcessor.Builder;
@@ -11,7 +12,8 @@ namespace DataProcessor.Builder;
 // Interface
 public interface IDocumentPipelineBuilder
 {
-    public IDocumentPipelineBuilder SetColour(Colour colour);
+    public IDocumentPipelineBuilder SetCompany(Company company);
+    public IDocumentPipelineBuilder SetFileLocations(IFileLocations fileLocations);
     public IDocumentPipelineBuilder BuildDataReader(IDataReader dataReader);
     public IDocumentPipelineBuilder BuildDataProcessor(IDataProcessor dataProcessor);
     public IDocumentPipelineBuilder BuildDataWriter(IDataWriter dataWriter);
@@ -28,9 +30,16 @@ public class DocumentPipelineBuilder : IDocumentPipelineBuilder
     private IDocumentPipeline _documentPipeline = new DocumentPipeline.DocumentPipeline();
 
     // Overarching approach param
-    public IDocumentPipelineBuilder SetColour(Colour colour)
+    public IDocumentPipelineBuilder SetCompany(Company company)
     {
-        _documentPipeline.Colour = colour;
+        _documentPipeline.Company = company;
+        return this;
+    }
+
+    // Overarching approach param
+    public IDocumentPipelineBuilder SetFileLocations(IFileLocations fileLocations)
+    {
+        _documentPipeline.FileLocations = fileLocations;
         return this;
     }
 

@@ -1,15 +1,13 @@
+using DataProcessor.FileLocations;
 using Microsoft.Data.Analysis;
 
 namespace DataProcessor.Components.DataWriters;
 public class ExcelWriter: IDataWriter
 {
-    // 
-    private string? _ExcelFilePath;
-    private string? _ExcelArchivePath;
-
     // Must write data for the processed doc to send
-    public void WriteData(DataFrame data)
+    public void WriteData(DataFrame data, string writeLocation)
     {
         // To implement
+
     }
 }
