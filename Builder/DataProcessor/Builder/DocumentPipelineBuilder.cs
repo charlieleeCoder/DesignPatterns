@@ -4,8 +4,8 @@ using DataProcessor.Components.DataProcessors;
 using DataProcessor.Components.DataWriters;
 using DataProcessor.Components.FileSenders;
 using DataProcessor.Components.FileArchivers;
-using DataProcessor.Components.FileLocations;
 using DataProcessor.DocumentPipeline;
+using DataProcessor.FileLocations;
 
 namespace DataProcessor.Builder;
 

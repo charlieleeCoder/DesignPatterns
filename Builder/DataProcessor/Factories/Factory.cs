@@ -40,10 +40,10 @@ public class Factory : IFactory
         // Relevant filepaths
         IFileLocations filePaths = Company switch
         {
-            Company.MuffinsMuffins  => new MuffinsMuffinsFiles(),
-            Company.NotRealLtd      => new NotRealLtdFiles(),
-            Company.MadeUpCo        => new MadeUpCoFiles(),
-            Company.NotGenericCo    => new NotGenericCoFiles(),
+            Company.MuffinsMuffins  => new MuffinsMuffinsFiles(Company.MuffinsMuffins, Report.Invoice),
+            Company.NotRealLtd      => new NotRealLtdFiles(Company.NotRealLtd, Report.BoardReport),
+            Company.MadeUpCo        => new MadeUpCoFiles(Company.MadeUpCo, Report.Accounting),
+            Company.NotGenericCo    => new NotGenericCoFiles(Company.NotGenericCo, Report.Operations),
             _                       => throw new NotImplementedException()
         };
 
