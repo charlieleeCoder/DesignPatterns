@@ -8,6 +8,7 @@ using DataProcessor.Components.DataWriters;
 using DataProcessor.Components.FileSenders;
 using DataProcessor.Components.FileArchivers;
 using DataProcessor.FileLocations;
+using DataProcessor.Strategies;
 
 namespace DataProcessor.Factories;
 
@@ -28,7 +29,7 @@ public class Factory : IFactory
     public Report Report    { get; set; }
 
     // Constructor
-    Factory(Company company, Report report)
+    public Factory(Company company, Report report)
     {
         Company = company;
         Report = report;
@@ -50,7 +51,7 @@ public class Factory : IFactory
 
         // Relevant filepaths
         IFilePathContext FilePathContext = new FilePathContext();
-        IFileLocations FilePaths = FilePathContext.ReturnFileLocations(Report, Company);
+        IFileLocations FilePaths = FilePathContext.ReturnFileLocations(Company, Report);
 
         // Create pipeline
         IDocumentPipeline Pipeline = Builder.SetCompany(Company)

@@ -1,5 +1,6 @@
 ﻿
 using DataProcessor.DocumentPipeline;
+using DataProcessor.Enums;
 using DataProcessor.Factories;
 
 namespace DataProcessor
@@ -11,9 +12,8 @@ namespace DataProcessor
 
 
             // Now return builder
-
-            IFactory Factory = new BlueFactory();
-            IDocumentPipeline documentPipeline = Factory.FactoryMethod();
+            IFactory Factory = new Factory(Company.MuffinsMuffins, Report.Invoice);
+            IDocumentPipeline documentPipeline = Factory.ReturnDocumentPipeline();
 
             // Call composed methods
             documentPipeline.ReadData();
