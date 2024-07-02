@@ -14,28 +14,15 @@ public abstract class BaseFileLocations : IFileLocations
     // Root
     public string RootFolder                                { get; set; }
 
-    // Start Folder & Filename
-    public virtual string StartingFileLocation              { get; set; }
-    public virtual string StartingFileName                  { get; set; }
-    public abstract string StartingFileExtension            { get; set; }
-    public abstract string StartPathFileExtension           { get; set; }
-
-    // Processing & Writing
-    public virtual string ProcessingFileLocation            { get; set; }
-    public virtual string ProcessingFileName                { get; set; }
-    public abstract string ProcessingFileExtension          { get; set; }
-    public abstract string ProcessingPathFileExtension      { get; set; }
+    // Folder & Filename & Extension
+    public virtual string StartPathFileExtension            { get; set; }
+    public virtual string ProcessingPathFileExtension       { get; set; }
 
     // Sending
     public abstract string DestinationLocation              { get; set; }
 
     // Archiving
-    public virtual string ArchiveFileLocation               { get; set; }
-    public virtual string ArchiveSentFileName               { get; set; }
-    public abstract string ArchiveSentFileExtension         { get; set; }
     public abstract string ArchiveSentPathFileExtension     { get; set; }
-    public virtual string ArchiveOriginalFileName           { get; set; }
-    public abstract string ArchiveOriginalFileExtension     { get; set; }
     public abstract string ArchiveOriginalPathFileExtension { get; set; }
 
 

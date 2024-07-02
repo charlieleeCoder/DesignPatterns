@@ -21,7 +21,7 @@ namespace DataProcessor
             documentPipeline.ReadData();
             documentPipeline.ProcessData();
             documentPipeline.WriteData();
-            //documentPipeline.SendFile();
+            documentPipeline.SendFile();
             //documentPipeline.ArchiveFiles();
 
             // Success!

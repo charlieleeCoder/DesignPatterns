@@ -4,38 +4,29 @@ namespace DataProcessor.FileLocations;
 
 public interface IFileLocations
 {
-    
+
     // Meta info
-    public Company Company                      { get; protected set; }
-    public string CompanyName                   { get; protected set; }
-    public Report Report                        { get; protected set; }
-    public string ReportName                    { get; protected set; }
+    public Company Company                          { get; set; }
+    public string CompanyName                       { get; set; }
+    public Report Report                            { get; set; }
+    public string ReportName                        { get; set; }
 
     // Root
-    public string RootFolder                    { get; protected set; }
+    public string RootFolder                        { get; set; }
 
-    // Start Folder & Filename
-    public string StartingFileLocation          { get; protected set; }
-    public string StartingFileName              { get; protected set; }
-    public string StartingFileExtension         { get; protected set; }
-    public string StartPathFileExtension        { get; protected set; }
+    // Folder & Filename & Extension
 
-    // Processing & Writing
-    public string ProcessingFileLocation        { get; protected set; }
-    public string ProcessingFileName            { get; protected set; }
-    public string ProcessingFileExtension       { get; protected set; }
-    public string ProcessingPathFileExtension   { get; protected set; }
+    // Reading
+    public string StartPathFileExtension            { get; protected set; }
+
+    // Porcessing
+    public string ProcessingPathFileExtension       { get; protected set; }
 
     // Sending
-    public string DestinationLocation           { get; protected set; }
+    public string DestinationLocation               { get; protected set; }
 
     // Archiving
-    public string ArchiveFileLocation           { get; protected set; }
-    public string ArchiveSentFileName           { get; protected set; }
-    public string ArchiveSentFileExtension      { get; protected set; }
-    public string ArchiveSentPathFileExtension  { get; protected set; }
-    public string ArchiveOriginalFileName       { get; protected set; }
-    public string ArchiveOriginalFileExtension  { get; protected set; }
-    public string ArchiveOriginalPathFileExtension { get; protected set; }
+    public string ArchiveSentPathFileExtension      { get; protected set; }
+    public string ArchiveOriginalPathFileExtension  { get; protected set; }
 
 }
