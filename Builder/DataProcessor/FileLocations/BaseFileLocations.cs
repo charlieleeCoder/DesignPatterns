@@ -6,33 +6,37 @@ public abstract class BaseFileLocations : IFileLocations
 {
 
     // Meta info
-    public Company Company                          { get; set; } 
-    public string CompanyName                       { get; set; }
-    public Report Report                            { get; set; }
-    public string ReportName                        { get; set; }
+    public Company Company                                  { get; set; } 
+    public string CompanyName                               { get; set; }
+    public Report Report                                    { get; set; }
+    public string ReportName                                { get; set; }
 
     // Root
-    public string RootFolder                        { get; set; }
+    public string RootFolder                                { get; set; }
 
     // Start Folder & Filename
-    public string StartingFileLocation              { get; set; }
-    public string StartingFileName                  { get; set; }
-    public abstract string StartingFileExtension    { get; set; }
+    public virtual string StartingFileLocation              { get; set; }
+    public virtual string StartingFileName                  { get; set; }
+    public abstract string StartingFileExtension            { get; set; }
+    public abstract string StartPathFileExtension           { get; set; }
 
     // Processing & Writing
-    public string ProcessingFileLocation            { get; set; }
-    public string ProcessingFileName                { get; set; }
-    public abstract string ProcessingFileExtension  { get; set; }
+    public virtual string ProcessingFileLocation            { get; set; }
+    public virtual string ProcessingFileName                { get; set; }
+    public abstract string ProcessingFileExtension          { get; set; }
+    public abstract string ProcessingPathFileExtension      { get; set; }
 
     // Sending
-    public abstract string DestinationLocation      { get; set; }
+    public abstract string DestinationLocation              { get; set; }
 
     // Archiving
-    public string ArchiveFileLocation               { get; set; }
-    public string ArchiveSentFileName               { get; set; }
-    public abstract string ArchiveSentFileExtension { get; set; }
-    public string ArchiveOriginalFileName           { get; set; }
-    public abstract string ArchiveOriginalFileExtension { get; set; }
+    public virtual string ArchiveFileLocation               { get; set; }
+    public virtual string ArchiveSentFileName               { get; set; }
+    public abstract string ArchiveSentFileExtension         { get; set; }
+    public abstract string ArchiveSentPathFileExtension     { get; set; }
+    public virtual string ArchiveOriginalFileName           { get; set; }
+    public abstract string ArchiveOriginalFileExtension     { get; set; }
+    public abstract string ArchiveOriginalPathFileExtension { get; set; }
 
 
     public BaseFileLocations(Company company, Report report)

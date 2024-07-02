@@ -5,14 +5,12 @@ public class EmailFileSender: IFileSender
 {
     public void SendFile(IFileLocations fileLocations)
     {
-        //// Select file
-        //if (File.Exists(fileLocations.))
-        //{
-            
-        //}
-        //else
-        //{
-        //    throw new ArgumentException($"File does not exist at {fileLocations.}");
-        //}
+        // Select file
+        if (!File.Exists(fileLocations.ProcessingPathFileExtension))
+        {
+            throw new ArgumentException($"File does not exist at {fileLocations.ProcessingPathFileExtension}");
+        }
+        
+
     }
 }

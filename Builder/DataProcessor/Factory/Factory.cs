@@ -14,21 +14,14 @@ public interface IFactory
     public IDocumentPipeline ReturnDocumentPipeline();
 }
 
-public class Factory : IFactory
+public class Factory(Company company, Report report) : IFactory
 {
+    // Could other forms of pipeline builder exist in the future?
+    private readonly IDocumentPipelineBuilder Builder = new DocumentPipelineBuilder();
 
-    private IDocumentPipelineBuilder Builder = new DocumentPipelineBuilder();
-
-    // Need setting
-    public Company Company  { get; set; }
-    public Report Report    { get; set; }
-
-    // Constructor
-    public Factory(Company company, Report report)
-    {
-        Company = company;
-        Report = report;
-    }
+    // Set from constructor
+    public Company Company  { get; set; } = company;
+    public Report Report    { get; set; } = report;
 
     // Factory Method
     public IDocumentPipeline ReturnDocumentPipeline()
@@ -59,8 +52,8 @@ public class Factory : IFactory
                                     .BuildDataReader(Strategy.Reader)
                                     .BuildDataProcessor(Strategy.Processor)
                                     .BuildDataWriter(Strategy.Writer)
-                                    //.BuildFileSender((IFileSender)Activator.CreateInstance(Strategy.Sender)!)
-                                    //.BuildFileArchiver((IFileArchiver)Activator.CreateInstance(Strategy.Archiver)!)
+                                    .BuildFileSender(Strategy.Sender)
+                                    .BuildFileArchiver(Strategy.Archiver)
                                     .Build();
 
         // Now return, fully-built, to main

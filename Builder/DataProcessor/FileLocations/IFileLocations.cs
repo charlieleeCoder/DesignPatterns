@@ -18,11 +18,13 @@ public interface IFileLocations
     public string StartingFileLocation          { get; protected set; }
     public string StartingFileName              { get; protected set; }
     public string StartingFileExtension         { get; protected set; }
+    public string StartPathFileExtension        { get; protected set; }
 
     // Processing & Writing
     public string ProcessingFileLocation        { get; protected set; }
     public string ProcessingFileName            { get; protected set; }
     public string ProcessingFileExtension       { get; protected set; }
+    public string ProcessingPathFileExtension   { get; protected set; }
 
     // Sending
     public string DestinationLocation           { get; protected set; }
@@ -31,7 +33,9 @@ public interface IFileLocations
     public string ArchiveFileLocation           { get; protected set; }
     public string ArchiveSentFileName           { get; protected set; }
     public string ArchiveSentFileExtension      { get; protected set; }
+    public string ArchiveSentPathFileExtension  { get; protected set; }
     public string ArchiveOriginalFileName       { get; protected set; }
     public string ArchiveOriginalFileExtension  { get; protected set; }
+    public string ArchiveOriginalPathFileExtension { get; protected set; }
 
 }
