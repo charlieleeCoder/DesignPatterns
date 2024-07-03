@@ -19,7 +19,15 @@ internal class PathInfo(string path, string fileName, string date, int versionNu
         // Different backing variables for different formats
         get 
         {
-            if (VersionType == typeof(int))
+            string result = VersionType switch
+            {
+                typeof(int) => _VersionNumberInt,
+                typeof(float) => _VersionNumberFloat,
+                typeof(string) => _VersionNumberString,
+            };
+
+            return result;
+                if (VersionType == typeof(int))
             {
                 return $"{_versionText}{_VersionNumberInt}";
             }
@@ -44,7 +52,7 @@ internal class PathInfo(string path, string fileName, string date, int versionNu
             }
             else
             {
-                throw new ArgumentException
+                throw new ArgumentException();
             }
         }    
     }
