@@ -8,7 +8,7 @@ public class SQLWriter : IDataWriter
     private DatabaseConnection _connection = new();
 
     // The sql writer effectively gets sent twice, once to the db, once by sender method
-    public void WriteData(DataFrame data, IFileLocations fileLocations)
+    public void WriteData(DataFrame data, string writeLocation)
     {
         // To implement
         _connection.Connect();

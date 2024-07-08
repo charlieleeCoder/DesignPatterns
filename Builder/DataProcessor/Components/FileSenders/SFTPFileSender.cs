@@ -3,7 +3,7 @@
 namespace DataProcessor.Components.FileSenders;
 public class SFTPFileSender: IFileSender
 {
-	public void SendFile(IFileLocations fileLocations)
+	public void SendFile(string fileToSend, string destinationLocation)
 	{
 		// Create SFTP connection
 

@@ -5,37 +5,37 @@ namespace DataProcessor.Components.FileArchivers;
 
 public interface IFileArchiver 
 {
-    public void ArchiveFiles(IFileLocations fileLocations);
+    public void ArchiveFiles(string originalFilePath, string originalArchivePath, string processedFilePath, string processedArchivePath);
 }
 
 public class SimpleFileArchiver: IFileArchiver 
 {
-    public void ArchiveFiles(IFileLocations fileLocations) 
+    public void ArchiveFiles(string originalFilePath, string originalArchivePath, string processedFilePath, string processedArchivePath) 
     {
         // Simple implementation, assuming version number is updated in original file
         try
         {
-            if (    File.Exists(fileLocations.StartPathFileExtension) 
-                && !File.Exists(fileLocations.ArchiveOriginalPathFileExtension)  ) 
+            if (    File.Exists(originalFilePath) 
+                && !File.Exists(originalArchivePath)  ) 
             {
-                File.Move(fileLocations.StartPathFileExtension, fileLocations.ArchiveOriginalPathFileExtension);
+                File.Move(originalFilePath, originalArchivePath);
                 Console.WriteLine("Files moved successfully!");
             } 
             
-            else if ( !File.Exists(fileLocations.StartPathFileExtension) )
+            else if ( !File.Exists(originalFilePath) )
             {
                 throw new IOException("One of the required documents is missing.");
             }
             
-            else if (File.Exists(fileLocations.ArchiveOriginalPathFileExtension))
+            else if (File.Exists(originalArchivePath))
             {
-                string version = IncrementVersionNumber(fileLocations.ArchiveOriginalFileName).ToString();
+                string version = IncrementVersionNumber(originalArchivePath).ToString();
             }
 
-            if ( File.Exists(fileLocations.ProcessingPathFileExtension)
-             && !File.Exists(fileLocations.ArchiveSentPathFileExtension))
+            if ( File.Exists(processedFilePath)
+             && !File.Exists(processedArchivePath))
             {
-                File.Move(fileLocations.ProcessingPathFileExtension, fileLocations.ArchiveSentPathFileExtension);
+                File.Move(processedFilePath, processedArchivePath);
                 Console.WriteLine("Files moved successfully!");
             }
 

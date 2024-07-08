@@ -6,7 +6,7 @@ using OpenQA.Selenium.DevTools.V123.Network;
 namespace DataProcessor.Components.FileSenders;
 public class WebPortalFileSender: IFileSender
 {
-    public void SendFile(IFileLocations fileLocations)
+    public void SendFile(string fileToSend, string destinationLocation)
     {
 
     //    // Run selenium webdriver

@@ -5,16 +5,16 @@ namespace DataProcessor.Strategies;
 
 public interface IFilePathContext
 {
-    public IFileLocations ReturnFileLocations(Company company, Report report);
+    public IFileLocationGroup ReturnFileLocations(Company company, Report report);
 }
 
 public class FilePathContext : IFilePathContext
 {
 
-    public IFileLocations ReturnFileLocations(Company company, Report report)
+    public IFileLocationGroup ReturnFileLocations(Company company, Report report)
     {
         // Get file path
-        IFileLocations filePaths = company switch
+        IFileLocationGroup filePaths = company switch
         {
             Company.MuffinsMuffins  => new MuffinsMuffinsFiles(report),
             Company.NotRealLtd      => new NotRealLtdFiles(report),

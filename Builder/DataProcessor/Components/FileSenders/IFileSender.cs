@@ -4,6 +4,6 @@ namespace DataProcessor.Components.FileSenders;
 public interface IFileSender
 {
     // Must implement a method to send data
-    void SendFile(IFileLocations fileLocations);
+    void SendFile(string fileToSend, string destinationLocation);
 
 }

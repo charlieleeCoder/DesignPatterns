@@ -20,7 +20,7 @@ public interface IDocumentPipeline
     public IDataWriter? DataWriter          { get; set; }
     public IFileSender? FileSender          { get; set; }
     public IFileArchiver? FileArchiver      { get; set; }
-    public IFileLocations? FileLocations    { get; set; }
+    public IFileLocationGroup? FileLocations    { get; set; }
 
     // Required methods
     public void ReadData();
@@ -35,7 +35,7 @@ public class DocumentPipeline : IDocumentPipeline
 
     // Implement interface
     public Company? Company                { get; set; }
-    public IFileLocations? FileLocations   { get; set; }
+    public IFileLocationGroup? FileLocations { get; set; }
     public IDataReader? DataReader         { get; set; }
     public IDataProcessor? DataProcessor   { get; set; }
     public IDataWriter? DataWriter         { get; set; }
@@ -61,7 +61,7 @@ public class DocumentPipeline : IDocumentPipeline
             throw new NullReferenceException("No start filepath has been given.");
         }
 		// Store raw unprocessed data
-		_unprocessedData = DataReader.ReadData(FileLocations);
+		_unprocessedData = DataReader.ReadData($"{FileLocations.StartPathFile}{FileLocations.StartExtension}");
         _currentData = _unprocessedData;
 	}
 
@@ -99,7 +99,7 @@ public class DocumentPipeline : IDocumentPipeline
         {
             throw new NullReferenceException("No file location set to write to.");
         }
-        DataWriter.WriteData(_currentData, FileLocations);
+        DataWriter.WriteData(_currentData, FileLocations.ProcessingPathFile);
 	}
 
 	// Call send method
@@ -114,7 +114,7 @@ public class DocumentPipeline : IDocumentPipeline
         {
             throw new NullReferenceException("Missing file path required to send file.");
         }
-        FileSender.SendFile(FileLocations);
+        FileSender.SendFile(FileLocations.ProcessingPathFile, FileLocations.DestinationLocation);
     }
 
 	// Call archiver
@@ -130,6 +130,6 @@ public class DocumentPipeline : IDocumentPipeline
         {
             throw new ArgumentException("We require filepaths to archive correct documents.");
         }
-        FileArchiver.ArchiveFiles(FileLocations);
+        FileArchiver.ArchiveFiles(FileLocations.StartPathFile, FileLocations.ArchiveOriginalPathFile, FileLocations.ProcessingPathFile, FileLocations.ArchiveSentPathFile);
 	}
 }

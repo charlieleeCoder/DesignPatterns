@@ -2,28 +2,20 @@
 
 namespace DataProcessor.FileLocations;
 
-public class NotGenericCoFiles : BaseFileLocations
+public class NotGenericCoFiles : BaseFileLocationGroup
 {
-    public override string StartingFileExtension        { get; set; }
-    public override string ProcessingFileExtension      { get; set; }
     public override string DestinationLocation          { get; set; }
-    public override string ArchiveSentFileExtension     { get; set; }
-    public override string ArchiveOriginalFileExtension { get; set; }
+    public string SubmitFormElementName                 { get; set; }
 
     public NotGenericCoFiles(Report report) : base(Company.NotGenericCo, report)
     {
-        // Reading
-        StartingFileExtension = ".csv";
-
-        // Processing & Writing
-        ProcessingFileExtension = ".csv";
 
         // Sending
-        DestinationLocation = $"www.{CompanyName}.com/upload_files/";
+        DestinationLocation = $"www.NotGenericCo.com/upload_files/";
 
-        // Archiving
-        ArchiveOriginalFileExtension = StartingFileExtension;
-        ArchiveSentFileExtension = ProcessingFileExtension;
+        // Only required for web portal sending, so not defined in the interface
+        SubmitFormElementName = "btn-submit_01";
+
     }
 
 }
