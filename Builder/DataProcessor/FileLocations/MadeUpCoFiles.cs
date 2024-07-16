@@ -14,10 +14,7 @@ public class MadeUpCoFiles : BaseFileGroup
         ArchiveSentPathFile.FileExtension = ".xlsx";
 
         // Sending
-        DestinationLocation = new FileDestination(
-                                                    sendMethod: "SFTP",
-                                                    sendDestination: "example@255.255.0.1"
-                                                  );
+        DestinationLocation = new FileDestination(sendMethod: "SFTP",sendDestination: "example@255.255.0.1");
 
     }
 

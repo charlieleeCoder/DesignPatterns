@@ -4,21 +4,24 @@ namespace DataProcessor.FileLocations;
 
 public class NotRealLtdFiles : BaseFileGroup
 {
-    public override string StartExtension           { get; set; }
-    public override string EndExtension             { get; set; }
-    public override string DestinationLocation      { get; set; }
+    public override FileDestination DestinationLocation      { get; set; }
 
     public NotRealLtdFiles(Report report) : base(Company.NotRealLtd, report)
     {
-        // Reading
-        StartExtension = ".xlsx";
 
-        // Processing & Writing
-        EndExtension = ".xlsx";
+        // Reading
+        StartPathFile.FileExtension = ".xlsx";
+
+        // Processing
+        ProcessingPathFile.FileExtension = ".xlsx";
 
         // Sending
-        DestinationLocation = $"sftp example@255.255.0.5";
-        
+        DestinationLocation = new FileDestination(sendMethod: "SFTP", sendDestination: "sftp example@255.255.0.5");
+
+        // Archiving
+        ArchiveSentPathFile.FileExtension = ".xlsx";
+        ArchiveOriginalPathFile.FileExtension = ".xlsx";
+
     }
 
 }
