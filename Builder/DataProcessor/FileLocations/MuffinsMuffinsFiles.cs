@@ -2,7 +2,7 @@
 
 namespace DataProcessor.FileLocations;
 
-public class MuffinsMuffinsFiles : BaseFileLocationGroup
+public class MuffinsMuffinsFiles : BaseFileGroup
 {
 
     public override string DestinationLocation { get; set; }

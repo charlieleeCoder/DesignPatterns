@@ -2,19 +2,22 @@
 
 namespace DataProcessor.FileLocations;
 
-public class MadeUpCoFiles : BaseFileLocationGroup
+public class MadeUpCoFiles : BaseFileGroup
 {
-    public override string EndExtension                 { get; set; }
-    public override string DestinationLocation          { get; set; }
+    public override FileDestination DestinationLocation { get; set; }
 
     public MadeUpCoFiles(Report report) : base(Company.MadeUpCo, report)
     {
 
         // Processing & Writing
-        EndExtension = ".xlsx";
+        ProcessingPathFile.FileExtension = ".xlsx";
+        ArchiveSentPathFile.FileExtension = ".xlsx";
 
         // Sending
-        DestinationLocation = "sftp example@255.255.0.1";
+        DestinationLocation = new FileDestination(
+                                                    sendMethod: "SFTP",
+                                                    sendDestination: "example@255.255.0.1"
+                                                  );
 
     }
 

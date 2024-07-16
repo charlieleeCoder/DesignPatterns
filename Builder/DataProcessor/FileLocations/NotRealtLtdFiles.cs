@@ -2,7 +2,7 @@
 
 namespace DataProcessor.FileLocations;
 
-public class NotRealLtdFiles : BaseFileLocationGroup
+public class NotRealLtdFiles : BaseFileGroup
 {
     public override string StartExtension           { get; set; }
     public override string EndExtension             { get; set; }

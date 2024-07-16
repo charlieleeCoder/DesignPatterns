@@ -2,7 +2,7 @@
 
 namespace DataProcessor.FileLocations;
 
-public class NotGenericCoFiles : BaseFileLocationGroup
+public class NotGenericCoFiles : BaseFileGroup
 {
     public override string DestinationLocation          { get; set; }
     public string SubmitFormElementName                 { get; set; }

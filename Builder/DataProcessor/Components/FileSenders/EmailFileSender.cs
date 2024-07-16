@@ -5,12 +5,12 @@ using System.Net;
 namespace DataProcessor.Components.FileSenders;
 public class EmailFileSender: IFileSender
 {
-    public void SendFile(IFileLocations fileLocations)
+    public void SendFile(string fileToSend, string destinationLocation)
     {
         // Return early if processed file is missing
-        if (!File.Exists(fileLocations.ProcessingPathFileExtension))
+        if (!File.Exists(fileToSend))
         {
-            throw new ArgumentException($"File does not exist at {fileLocations.ProcessingPathFileExtension}");
+            throw new ArgumentException($"File does not exist at {fileToSend}");
         }
 
         // As the details below are made up
@@ -25,13 +25,13 @@ public class EmailFileSender: IFileSender
         var mailMessage = new MailMessage
         {
             From = new MailAddress("from@example.com"),
-            Subject = fileLocations.StartingFileName,
-            Body = $"Please find {fileLocations.StartingFileName} attached."
+            Subject = fileToSend,
+            Body = $"Please find {fileToSend} attached."
         };
 
         // Select file and destination
-        Attachment attachment = new(fileLocations.ProcessingPathFileExtension);
-        mailMessage.To.Add(fileLocations.DestinationLocation);
+        Attachment attachment = new(fileToSend);
+        mailMessage.To.Add(destinationLocation);
         mailMessage.Attachments.Add(attachment);
 
         // Need SMTP server details, but this has
