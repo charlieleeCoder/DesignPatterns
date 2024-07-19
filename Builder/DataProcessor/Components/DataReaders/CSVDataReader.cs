@@ -9,10 +9,10 @@ public class CSVDataReader: IDataReader
     private readonly Encoding _encoding = Encoding.UTF8;
 
     // Open file at filepath, to store in _data 
-    public DataFrame ReadData(IFileLocation startLocation)
+    public DataFrame ReadData(string startLocation)
     {
         // Error handling for when version number is not 1 or date is backdated
-        if (!File.Exists(startLocation.GetFileLocation()))
+        if (!File.Exists(startLocation))
         {
 
         }
@@ -20,14 +20,14 @@ public class CSVDataReader: IDataReader
         // Hand back DataFrame
         try
         {
-            DataFrame Data = DataFrame.LoadCsv(startLocation.GetFileLocation(), encoding: _encoding);
+            DataFrame Data = DataFrame.LoadCsv(startLocation, encoding: _encoding);
             return Data;
         }
 
         // Specific catch
         catch (IOException) 
         {
-            throw new IOException($"The file {startLocation.GetFileLocation()} is currently open and needs to be closed.");
+            throw new IOException($"The file {startLocation} is currently open and needs to be closed.");
         }
 
         // General catch

@@ -4,8 +4,9 @@
 public interface IFileLocation
 {
     public abstract string GetFileLocation();
-    public abstract string GetFileStartsLike();
     public abstract void IncrementVersionNumber();
+    public abstract void SetVersionNumber(int versionNumber);
+    public abstract void ChangeFileDateText(string formattedDateText);
     public abstract void ChangeFileExtension(string fileExtension);
 }
 
@@ -51,7 +52,7 @@ public class FileLocation : IFileLocation
         return $"{FilePath}{FileName} {FormattedFileDate}{FileVersionText}{VersionNumber}{FileExtension}";
     }
 
-    public virtual string GetFileStartsLike() 
+    public virtual void ChangeFileDateText(string formattedDateText)
     {
         return $"{FilePath}{FileName}";
     }
@@ -60,6 +61,11 @@ public class FileLocation : IFileLocation
     public virtual void IncrementVersionNumber()
     {
         VersionNumber++;
+    }
+
+    public virtual void SetVersionNumber(int versionNumber)
+    {
+        VersionNumber = versionNumber;
     }
 
     // If the default of csv is not correct for this company, change to new type

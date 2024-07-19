@@ -21,7 +21,7 @@ public class UnprocessedCSVSentByEmail : BaseComponentsRequired
 {
     public UnprocessedCSVSentByEmail()
     {
-        Verifier    = new FileLocationVerifier(); //Func<FileLocationVerifier>
+        Verifier    = new FileLocationVerifier();
         Reader      = new CSVDataReader();
         Processor   = new UnProcessed();
         Writer      = new CSVWriter();
