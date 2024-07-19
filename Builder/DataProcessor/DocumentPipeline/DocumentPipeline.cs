@@ -81,7 +81,7 @@ public class DocumentPipeline : IDocumentPipeline
             throw new NullReferenceException("No start filepath has been given.");
         }
 		// Store raw unprocessed data
-		_unprocessedData = DataReader.ReadData(startLocation: FileLocations.StartPathFile);
+		_unprocessedData = DataReader.ReadData(startLocation: FileLocations.StartPathFile.GetFileLocation());
         _currentData = _unprocessedData;
 	}
 

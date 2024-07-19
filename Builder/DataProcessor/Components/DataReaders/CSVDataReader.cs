@@ -14,7 +14,8 @@ public class CSVDataReader: IDataReader
         // Error handling for when version number is not 1 or date is backdated
         if (!File.Exists(startLocation))
         {
-
+            // This shouldn't ever trigger, as file verifier in place
+            throw new FileNotFoundException($"Cannot find {startLocation}");
         }
 
         // Hand back DataFrame

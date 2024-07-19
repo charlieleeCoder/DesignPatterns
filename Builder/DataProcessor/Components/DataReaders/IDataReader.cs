@@ -5,6 +5,6 @@ namespace DataProcessor.Components.DataReaders;
 public interface IDataReader
 {
     // Must implement a method to read data, requiring filepath
-    public DataFrame ReadData(IFileLocation startLocation);
+    public DataFrame ReadData(string startLocation);
 
 }

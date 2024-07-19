@@ -18,6 +18,7 @@ namespace DataProcessor
             IDocumentPipeline documentPipeline = Factory.ReturnDocumentPipeline();
 
             // Call composed methods
+            documentPipeline.VerifyFiles();
             documentPipeline.ReadData();
             documentPipeline.ProcessData();
             documentPipeline.WriteData();

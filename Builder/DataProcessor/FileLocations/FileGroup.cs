@@ -65,11 +65,11 @@ public abstract class FileGroup : IFileGroup
 
         // Original document
         StartPathFile = new FileLocation(
-                                            filePath:$"C:\\FakeData\\{CompanyName}\\{ReportName}\\",
+                                            filePath:$"C:\\FakeData\\{CompanyName}\\{ReportName}\\OriginalOutput\\",
                                             fileName: FileName,
                                             //formattedFileDate: $"{DateTime.Now:dd-mm-yy}", -- Live
                                             formattedFileDate: "01-07-24",                // -- Testing
-                                            fileVersionText: "v",
+                                            fileVersionText: " v",
                                             versionNumber: 1,
                                             appendedStatus: "",
                                             fileExtension:".csv" // Most common, so use as default

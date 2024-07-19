@@ -15,7 +15,7 @@ public class FileLocation : IFileLocation
 {
     public virtual string FilePath              { get; protected set; }    // e.g. C:\\Root\CompanyName\AccountsReport\
     public virtual string FileName              { get; protected set; }
-    public virtual string FormattedFileDate     { get; protected set; }
+    public static string FormattedFileDate      { get; protected set; } = string.Empty;
     public virtual string FileVersionText       { get; protected set; }    // e.g. "" or " v" or " v." or " version"
     public static int VersionNumber             { get; protected set; }    // Change version number for all files if v1 already exists, etc.
     public virtual string AppendedStatus        { get; protected set; }    // e.g. " - PROCESSING" or " - ORIGINAL"
@@ -38,7 +38,7 @@ public class FileLocation : IFileLocation
     {
         this.FilePath = modifiedFilePath;                               // e.g. C:\\Root\CompanyName\AccountsReport\
         this.FileName = otherInstanceToCopy.FileName;
-        this.FormattedFileDate = otherInstanceToCopy.FormattedFileDate;
+        FormattedFileDate = FileLocation.FormattedFileDate;
         this.FileVersionText = otherInstanceToCopy.FileVersionText;     // e.g. "" or " v" or " v." or " version"
         VersionNumber = FileLocation.VersionNumber;
         this.AppendedStatus = modifiedStatus;                           // e.g. " - PROCESSING" or " - ORIGINAL"
@@ -54,7 +54,7 @@ public class FileLocation : IFileLocation
 
     public virtual void ChangeFileDateText(string formattedDateText)
     {
-        return $"{FilePath}{FileName}";
+        FormattedFileDate = formattedDateText;
     }
 
     // Required for when above v1
@@ -63,6 +63,7 @@ public class FileLocation : IFileLocation
         VersionNumber++;
     }
 
+    // Required when using file location verifier to find version and date
     public virtual void SetVersionNumber(int versionNumber)
     {
         VersionNumber = versionNumber;
