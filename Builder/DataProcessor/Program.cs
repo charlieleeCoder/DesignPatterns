@@ -23,7 +23,7 @@ namespace DataProcessor
             documentPipeline.ProcessData();
             documentPipeline.WriteData();
             documentPipeline.SendFile();
-            //documentPipeline.ArchiveFiles();
+            documentPipeline.ArchiveFiles();
 
             // Success!
             Environment.Exit(0);

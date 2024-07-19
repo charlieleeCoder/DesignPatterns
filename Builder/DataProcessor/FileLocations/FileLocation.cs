@@ -49,7 +49,7 @@ public class FileLocation : IFileLocation
     public virtual string GetFileLocation()
     {
         // Example of output: RootEtc\AccountReport 22.05.24 version1.csv
-        return $"{FilePath}{FileName} {FormattedFileDate} {FileVersionText}{VersionNumber}{FileExtension}";
+        return $"{FilePath}{FileName} {FormattedFileDate} {FileVersionText}{VersionNumber}{AppendedStatus}{FileExtension}";
     }
 
     public virtual void ChangeFileDateText(string formattedDateText)
