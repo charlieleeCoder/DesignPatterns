@@ -6,6 +6,7 @@ using DataProcessor.Components.FileSenders;
 using DataProcessor.Components.FileArchivers;
 using DataProcessor.DocumentPipeline;
 using DataProcessor.FileLocations;
+using DataProcessor.Components.FileIdentifiers;
 
 namespace DataProcessor.Builder;
 
@@ -13,7 +14,8 @@ namespace DataProcessor.Builder;
 public interface IDocumentPipelineBuilder
 {
     public IDocumentPipelineBuilder SetCompany(Company company);
-    public IDocumentPipelineBuilder SetFileLocations(IFileLocations fileLocations);
+    public IDocumentPipelineBuilder SetFileLocations(IFileGroup fileLocations);
+    public IDocumentPipelineBuilder BuildFileVerifier(IFileLocationVerifier fileVerifier);
     public IDocumentPipelineBuilder BuildDataReader(IDataReader dataReader);
     public IDocumentPipelineBuilder BuildDataProcessor(IDataProcessor dataProcessor);
     public IDocumentPipelineBuilder BuildDataWriter(IDataWriter dataWriter);
@@ -37,9 +39,16 @@ public class DocumentPipelineBuilder : IDocumentPipelineBuilder
     }
 
     // Overarching approach param
-    public IDocumentPipelineBuilder SetFileLocations(IFileLocations fileLocations)
+    public IDocumentPipelineBuilder SetFileLocations(IFileGroup fileLocations)
     {
         _documentPipeline.FileLocations = fileLocations;
+        return this;
+    }
+
+    // Verify the version number and date are as we expect
+    public IDocumentPipelineBuilder BuildFileVerifier(IFileLocationVerifier fileVerifier)
+    {
+        _documentPipeline.FileVerifier = fileVerifier;
         return this;
     }
 

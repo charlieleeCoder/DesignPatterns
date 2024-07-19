@@ -1,8 +1,8 @@
 ﻿using DataProcessor.Enums;
 
-namespace DataProcessor.FileLocations;
+namespace DataProcessor.FileLocations.CompanyImplementations;
 
-public class MuffinsMuffinsFiles : BaseFileGroup
+public class MuffinsMuffinsFiles : FileGroup
 {
 
     public override FileDestination DestinationLocation { get; set; }
@@ -11,7 +11,7 @@ public class MuffinsMuffinsFiles : BaseFileGroup
     {
 
         // Sending
-        DestinationLocation = new FileDestination(sendMethod:"email",sendDestination:"madeupemail@MuffinsMuffins.com");
+        DestinationLocation = new FileDestination(sendMethod: "email", sendDestination: "madeupemail@MuffinsMuffins.com");
 
     }
 

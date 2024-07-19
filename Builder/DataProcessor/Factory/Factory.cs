@@ -41,7 +41,7 @@ public class Factory(Company company, Report report) : IFactory
 
         // Relevant filepaths
         IFilePathContext FilePathContext = new FilePathContext();
-        IFileLocations FilePaths = FilePathContext.ReturnFileLocations(Company, Report);
+        IFileGroup FilePaths = FilePathContext.ReturnFileLocations(Company, Report);
 
         Console.WriteLine(Company);
         Console.WriteLine(Report);
@@ -49,6 +49,7 @@ public class Factory(Company company, Report report) : IFactory
         // Create pipeline
         IDocumentPipeline Pipeline = Builder.SetCompany(Company)
                                     .SetFileLocations(FilePaths)
+                                    .BuildFileVerifier(Strategy.Verifier)
                                     .BuildDataReader(Strategy.Reader)
                                     .BuildDataProcessor(Strategy.Processor)
                                     .BuildDataWriter(Strategy.Writer)
