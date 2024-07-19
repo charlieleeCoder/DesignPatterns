@@ -1,6 +1,4 @@
 ﻿using DataProcessor.FileLocations;
-using DocumentFormat.OpenXml.InkML;
-using System.Linq;
 
 namespace DataProcessor.Components.FileIdentifiers;
 
@@ -84,28 +82,30 @@ public class FileLocationVerifier : IFileLocationVerifier
         }
 
         // Split all parts of the file name
-        string[] textComponents = matchingFiles.ElementAt(0).Split();
+        string[] dateAndVersionOnly = matchingFiles.ElementAt(0)
+                                                   .Replace(expectedFileLocations.StartPathFile.FileName, "")
+                                                   .Replace(expectedFileLocations.StartPathFile.FilePath, "")
+                                                   .Replace(expectedFileLocations.StartPathFile.FileExtension,"")
+                                                   .Split(' ');
 
-        // Get rid of the ones that are set in stone
-        string[] elementsToRemove = [expectedFileLocations.StartPathFile.FileName, expectedFileLocations.StartPathFile.FileVersionText, expectedFileLocations.StartPathFile.FileExtension ];
+        // Determine which are correct file dates and version number with file
+        string versionAsString = dateAndVersionOnly.Where(text => text.StartsWith(expectedFileLocations.StartPathFile.FileVersionText)).ToArray()[0];
+        string dateOnly = dateAndVersionOnly.Where(text => !text.StartsWith(expectedFileLocations.StartPathFile.FileVersionText)
+                                                        && text.Length > 0).ToArray()[0]; // Get rid of blank string
 
-        // Unknown components are date and version number
-        string[] dateAndVersionNumberOnly = textComponents.Where(item => !elementsToRemove.Contains(item)).ToArray();
-
-        // Determine which are correct file dates and version numbers
-        string dateOnly = dateAndVersionNumberOnly.Where(text => text.Length > 2).ToArray()[0];
+        // Modification
         expectedFileLocations.StartPathFile.ChangeFileDateText(dateOnly);
 
-        // Capture as text for exception
-        string versionNumAsString = dateAndVersionNumberOnly.Where(text => text.Length <= 2).ToArray()[0];
+        // Capture as text first for exception
+        string versionNumberOnlyAsString = versionAsString.Replace(expectedFileLocations.StartPathFile.FileVersionText, "");
         try
         {
-            int versionNumberOnly = int.Parse(versionNumAsString);
+            int versionNumberOnly = int.Parse(versionNumberOnlyAsString);
             expectedFileLocations.StartPathFile.SetVersionNumber(versionNumberOnly);
         }
         catch(FormatException)
         {
-            throw new FormatException($"{versionNumAsString} is not a valid interger.");
+            throw new FormatException($"{versionNumberOnlyAsString} is not a valid integer.");
         }
 
         return expectedFileLocations;

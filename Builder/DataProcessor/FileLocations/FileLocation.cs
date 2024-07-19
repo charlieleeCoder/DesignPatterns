@@ -16,7 +16,7 @@ public class FileLocation : IFileLocation
     public virtual string FilePath              { get; protected set; }    // e.g. C:\\Root\CompanyName\AccountsReport\
     public virtual string FileName              { get; protected set; }
     public static string FormattedFileDate      { get; protected set; } = string.Empty;
-    public virtual string FileVersionText       { get; protected set; }    // e.g. "" or " v" or " v." or " version"
+    public virtual string FileVersionText       { get; protected set; }    // e.g. "" or "v" or "v." or "version"
     public static int VersionNumber             { get; protected set; }    // Change version number for all files if v1 already exists, etc.
     public virtual string AppendedStatus        { get; protected set; }    // e.g. " - PROCESSING" or " - ORIGINAL"
     public virtual string FileExtension         { get; protected set; }
@@ -49,7 +49,7 @@ public class FileLocation : IFileLocation
     public virtual string GetFileLocation()
     {
         // Example of output: RootEtc\AccountReport 22.05.24 version1.csv
-        return $"{FilePath}{FileName} {FormattedFileDate}{FileVersionText}{VersionNumber}{FileExtension}";
+        return $"{FilePath}{FileName} {FormattedFileDate} {FileVersionText}{VersionNumber}{FileExtension}";
     }
 
     public virtual void ChangeFileDateText(string formattedDateText)
