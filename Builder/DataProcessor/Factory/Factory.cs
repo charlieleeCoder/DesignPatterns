@@ -40,7 +40,7 @@ public class Factory(Company company, Report report) : IFactory
         Console.WriteLine(Strategy.ToString());
 
         // Relevant filepaths
-        IFilePathContext FilePathContext = new FilePathContext();
+        IFilePathContext FilePathContext = new RelevantFilePath();
         IFileGroup FilePaths = FilePathContext.ReturnFileLocations(Company, Report);
 
         Console.WriteLine(Company);

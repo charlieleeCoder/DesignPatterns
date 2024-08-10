@@ -9,7 +9,7 @@ public interface IFilePathContext
     public IFileGroup ReturnFileLocations(Company company, Report report);
 }
 
-public class FilePathContext : IFilePathContext
+public class RelevantFilePath : IFilePathContext
 {
 
     public IFileGroup ReturnFileLocations(Company company, Report report)
