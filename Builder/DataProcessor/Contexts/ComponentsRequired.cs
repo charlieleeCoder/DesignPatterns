@@ -4,9 +4,8 @@ using DataProcessor.Components.DataWriters;
 using DataProcessor.Components.FileArchivers;
 using DataProcessor.Components.FileSenders;
 using DataProcessor.Components.FileIdentifiers;
-using DataProcessor.Enums;
 
-namespace DataProcessor.ComponentsRequired;
+namespace DataProcessor.Contexts;
 
 public interface IComponentList
 {
@@ -77,20 +76,5 @@ public class ProcessedCSVConvertedtoExcelSentViaSFTP : BaseComponentsRequired
         Writer      = new ExcelWriter();
         Sender      = new SFTPFileSender();
         Archiver    = new SimpleFileArchiver();
-    }
-}
-
-public class ComponentSelector
-{
-    public static IComponentList ReturnComponentsList(Company company)
-    {
-        return company switch
-        {
-            Company.MuffinsMuffins => new UnprocessedCSVSentByEmail(),
-            Company.NotRealLtd => new ProcessedExcelSentViaSFTP(),
-            Company.MadeUpCo => new ProcessedCSVConvertedtoExcelSentViaSFTP(),
-            Company.NotGenericCo => new UnprocessedCSVSentByWebDriver(),
-            _ => throw new NotImplementedException()
-        };
     }
 }
