@@ -27,20 +27,13 @@ public class Factory(Company company, Report report) : IFactory
     public IDocumentPipeline ReturnDocumentPipeline()
     {
 
-        // Get strategy
+        // Get components required & relevant file paths for company and report
         IComponentList components = ComponentSelector.ReturnComponentsList(Company);
-        Console.WriteLine(components.ToString());
-
-        // Relevant filepaths
-        IFilePathContext FilePathContext = new RelevantFilePath();
-        IFileGroup FilePaths = FilePathContext.ReturnFileLocations(Company, Report);
-
-        Console.WriteLine(Company);
-        Console.WriteLine(Report);
+        IFileGroup filePaths = RelevantFilePath.ReturnFileLocations(Company, Report);
 
         // Create pipeline
         IDocumentPipeline Pipeline = Builder.SetCompany(Company)
-                                    .SetFileLocations(FilePaths)
+                                    .SetFileLocations(filePaths)
                                     .BuildFileVerifier(components.Verifier)
                                     .BuildDataReader(components.Reader!)
                                     .BuildDataProcessor(components.Processor!)

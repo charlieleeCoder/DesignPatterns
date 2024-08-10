@@ -4,15 +4,10 @@ using DataProcessor.FileLocations.FileGroup;
 
 namespace DataProcessor.Strategies;
 
-public interface IFilePathContext
-{
-    public IFileGroup ReturnFileLocations(Company company, Report report);
-}
-
-public class RelevantFilePath : IFilePathContext
+public class RelevantFilePath 
 {
 
-    public IFileGroup ReturnFileLocations(Company company, Report report)
+    public static IFileGroup ReturnFileLocations(Company company, Report report)
     {
         // Get file path
         IFileGroup filePaths = company switch
