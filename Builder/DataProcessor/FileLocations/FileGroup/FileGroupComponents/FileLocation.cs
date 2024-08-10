@@ -3,7 +3,7 @@
  * Multiple of these make up a FileGroup, with a record of file locations for the following files:
  * 
  * - Original
- * - Processed (file written after processing)
+ * - Processed (new file written after being processing)
  * - OriginalArchive
  * - ProcessedArchive
  */

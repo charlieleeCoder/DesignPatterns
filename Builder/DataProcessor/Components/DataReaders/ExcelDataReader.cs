@@ -7,10 +7,7 @@ public class ExcelDataReader: IDataReader
 	public DataFrame ReadData(string startLocation)
 	{
         // Error handling
-        if (startLocation == null)
-        {
-            throw new ArgumentNullException(nameof(startLocation));
-        }
+        ArgumentNullException.ThrowIfNull(startLocation);
 
         // This handles .xlsx as well as csv, but don't add encoding
         DataFrame dataFrame = DataFrame.LoadCsv(startLocation);

@@ -28,16 +28,8 @@ public class Factory(Company company, Report report) : IFactory
     {
 
         // Get strategy
-        BaseComponentsRequired Strategy = Company switch
-        {
-            Company.MuffinsMuffins  => new UnprocessedCSVSentByEmail(),
-            Company.NotRealLtd      => new ProcessedExcelSentViaSFTP(),
-            Company.MadeUpCo        => new ProcessedCSVConvertedtoExcelSentViaSFTP(),
-            Company.NotGenericCo    => new UnprocessedCSVSentByWebDriver(),
-            _                       => throw new NotImplementedException()
-        };
-
-        Console.WriteLine(Strategy.ToString());
+        IComponentList components = ComponentSelector.ReturnComponentsList(Company);
+        Console.WriteLine(components.ToString());
 
         // Relevant filepaths
         IFilePathContext FilePathContext = new RelevantFilePath();
@@ -49,12 +41,12 @@ public class Factory(Company company, Report report) : IFactory
         // Create pipeline
         IDocumentPipeline Pipeline = Builder.SetCompany(Company)
                                     .SetFileLocations(FilePaths)
-                                    .BuildFileVerifier(Strategy.Verifier)
-                                    .BuildDataReader(Strategy.Reader)
-                                    .BuildDataProcessor(Strategy.Processor)
-                                    .BuildDataWriter(Strategy.Writer)
-                                    .BuildFileSender(Strategy.Sender)
-                                    .BuildFileArchiver(Strategy.Archiver)
+                                    .BuildFileVerifier(components.Verifier)
+                                    .BuildDataReader(components.Reader!)
+                                    .BuildDataProcessor(components.Processor!)
+                                    .BuildDataWriter(components.Writer!)
+                                    .BuildFileSender(components.Sender)
+                                    .BuildFileArchiver(components.Archiver)
                                     .Build();
 
         // Now return, fully-built, to main

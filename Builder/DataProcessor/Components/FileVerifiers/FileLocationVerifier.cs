@@ -32,7 +32,7 @@ public class FileLocationVerifier : IFileLocationVerifier
 
     }
 
-    private bool CheckVersionNumbers(IFileGroup expectedFileLocations)
+    private static bool CheckVersionNumbers(IFileGroup expectedFileLocations)
     {
         // Local temp variables
         bool fileFound = false;
@@ -51,7 +51,7 @@ public class FileLocationVerifier : IFileLocationVerifier
         return fileFound;
     }
 
-    private IFileGroup CheckOtherDates(IFileGroup expectedFileLocations)
+    private static IFileGroup CheckOtherDates(IFileGroup expectedFileLocations)
     {
         // Temp local variables for clarity
         string directoryPath = expectedFileLocations.StartPathFile.FilePath;

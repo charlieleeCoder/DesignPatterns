@@ -4,17 +4,28 @@ using DataProcessor.Components.DataWriters;
 using DataProcessor.Components.FileArchivers;
 using DataProcessor.Components.FileSenders;
 using DataProcessor.Components.FileIdentifiers;
+using DataProcessor.Enums;
 
 namespace DataProcessor.ComponentsRequired;
 
-public abstract class BaseComponentsRequired
+public interface IComponentList
 {
-    public virtual IFileLocationVerifier Verifier   { get; protected set; } = default!;
-    public virtual IDataReader Reader               { get; protected set; } = default!;
-    public virtual IDataProcessor Processor         { get; protected set; } = default!;
-    public virtual IDataWriter Writer               { get; protected set; } = default!;
-    public virtual IFileSender Sender               { get; protected set; } = default!;
-    public virtual IFileArchiver Archiver           { get; protected set; } = default!;
+    public IFileLocationVerifier Verifier { get; set; }
+    public IDataReader? Reader { get; set; }
+    public IDataProcessor? Processor { get; set; }
+    public IDataWriter? Writer { get; set; }
+    public IFileSender Sender { get; set; } 
+    public IFileArchiver Archiver { get; set; } 
+}
+
+public abstract class BaseComponentsRequired : IComponentList
+{
+    public virtual IFileLocationVerifier Verifier   { get; set; } = default!;
+    public virtual IDataReader? Reader              { get; set; }
+    public virtual IDataProcessor? Processor        { get; set; } 
+    public virtual IDataWriter? Writer              { get; set; }
+    public virtual IFileSender Sender               { get; set; } = default!;
+    public virtual IFileArchiver Archiver           { get; set; } = default!;
 }
 
 public class UnprocessedCSVSentByEmail : BaseComponentsRequired
@@ -66,5 +77,20 @@ public class ProcessedCSVConvertedtoExcelSentViaSFTP : BaseComponentsRequired
         Writer      = new ExcelWriter();
         Sender      = new SFTPFileSender();
         Archiver    = new SimpleFileArchiver();
+    }
+}
+
+public class ComponentSelector
+{
+    public static IComponentList ReturnComponentsList(Company company)
+    {
+        return company switch
+        {
+            Company.MuffinsMuffins => new UnprocessedCSVSentByEmail(),
+            Company.NotRealLtd => new ProcessedExcelSentViaSFTP(),
+            Company.MadeUpCo => new ProcessedCSVConvertedtoExcelSentViaSFTP(),
+            Company.NotGenericCo => new UnprocessedCSVSentByWebDriver(),
+            _ => throw new NotImplementedException()
+        };
     }
 }
