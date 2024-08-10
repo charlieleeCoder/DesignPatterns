@@ -1,8 +1,10 @@
 ﻿using DataProcessor.Enums;
+using DataProcessor.FileLocations.FileGroup;
+using DataProcessor.FileLocations.FileGroup.FileGroupComponents;
 
 namespace DataProcessor.FileLocations.CompanyImplementations;
 
-public class MadeUpCoFiles : FileGroup
+public class MadeUpCoFiles : BaseFileGroup
 {
     public override FileDestination DestinationLocation { get; set; }
 
@@ -17,6 +19,4 @@ public class MadeUpCoFiles : FileGroup
         DestinationLocation = new FileDestination(sendMethod: "SFTP", sendDestination: "example@255.255.0.1");
 
     }
-
-
 }

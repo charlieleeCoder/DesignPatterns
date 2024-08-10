@@ -1,4 +1,14 @@
-﻿namespace DataProcessor.FileLocations;
+﻿/*
+ * Used by the DataReader, DataWriter and FileArchiver components. 
+ * Multiple of these make up a FileGroup, with a record of file locations for the following files:
+ * 
+ * - Original
+ * - Processed (file written after processing)
+ * - OriginalArchive
+ * - ProcessedArchive
+ */
+
+namespace DataProcessor.FileLocations.FileGroup.FileGroupComponents;
 
 // Requirements for interface
 public interface IFileLocation
@@ -13,13 +23,13 @@ public interface IFileLocation
 // Base implementation, which is largely consistent
 public class FileLocation : IFileLocation
 {
-    public virtual string FilePath              { get; protected set; }    // e.g. C:\\Root\CompanyName\AccountsReport\
-    public virtual string FileName              { get; protected set; }
-    public static string FormattedFileDate      { get; protected set; } = string.Empty;
-    public virtual string FileVersionText       { get; protected set; }    // e.g. "" or "v" or "v." or "version"
-    public static int VersionNumber             { get; protected set; }    // Change version number for all files if v1 already exists, etc.
-    public virtual string AppendedStatus        { get; protected set; }    // e.g. " - PROCESSING" or " - ORIGINAL"
-    public virtual string FileExtension         { get; protected set; }
+    public virtual string FilePath { get; protected set; }    // e.g. C:\\Root\CompanyName\AccountsReport\
+    public virtual string FileName { get; protected set; }
+    public static string FormattedFileDate { get; protected set; } = string.Empty;
+    public virtual string FileVersionText { get; protected set; }    // e.g. "" or "v" or "v." or "version"
+    public static int VersionNumber { get; protected set; }    // Change version number for all files if v1 already exists, etc.
+    public virtual string AppendedStatus { get; protected set; }    // e.g. " - PROCESSING" or " - ORIGINAL"
+    public virtual string FileExtension { get; protected set; }
 
     // Constructor to initialize
     public FileLocation(string filePath, string fileName, string formattedFileDate, string fileVersionText, int versionNumber, string appendedStatus, string fileExtension)
@@ -36,13 +46,13 @@ public class FileLocation : IFileLocation
     // Copy constructor with modified path and status (these are the main differences between each file location)
     public FileLocation(FileLocation otherInstanceToCopy, string modifiedFilePath, string modifiedStatus)
     {
-        this.FilePath = modifiedFilePath;                               // e.g. C:\\Root\CompanyName\AccountsReport\
-        this.FileName = otherInstanceToCopy.FileName;
-        FormattedFileDate = FileLocation.FormattedFileDate;
-        this.FileVersionText = otherInstanceToCopy.FileVersionText;     // e.g. "" or " v" or " v." or " version"
-        VersionNumber = FileLocation.VersionNumber;
-        this.AppendedStatus = modifiedStatus;                           // e.g. " - PROCESSING" or " - ORIGINAL"
-        this.FileExtension = otherInstanceToCopy.FileExtension;
+        FilePath = modifiedFilePath;                               // e.g. C:\\Root\CompanyName\AccountsReport\
+        FileName = otherInstanceToCopy.FileName;
+        FormattedFileDate = FormattedFileDate;
+        FileVersionText = otherInstanceToCopy.FileVersionText;     // e.g. "" or " v" or " v." or " version"
+        VersionNumber = VersionNumber;
+        AppendedStatus = modifiedStatus;                           // e.g. " - PROCESSING" or " - ORIGINAL"
+        FileExtension = otherInstanceToCopy.FileExtension;
     }
 
     // Required method for decoupled components expecting an IFileLocation with a simple way to find the file
@@ -70,8 +80,8 @@ public class FileLocation : IFileLocation
     }
 
     // If the default of csv is not correct for this company, change to new type
-    public virtual void ChangeFileExtension(string fileExtension) 
+    public virtual void ChangeFileExtension(string fileExtension)
     {
-        this.FileExtension = fileExtension;
+        FileExtension = fileExtension;
     }
 }

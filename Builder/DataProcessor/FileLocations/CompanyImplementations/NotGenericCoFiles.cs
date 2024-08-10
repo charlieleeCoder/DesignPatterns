@@ -1,8 +1,10 @@
 ﻿using DataProcessor.Enums;
+using DataProcessor.FileLocations.FileGroup;
+using DataProcessor.FileLocations.FileGroup.FileGroupComponents;
 
 namespace DataProcessor.FileLocations.CompanyImplementations;
 
-public class NotGenericCoFiles : FileGroup
+public class NotGenericCoFiles : BaseFileGroup
 {
     public override FileDestination DestinationLocation { get; set; }
     public string SubmitFormElementName { get; set; }

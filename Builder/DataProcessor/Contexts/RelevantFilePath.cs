@@ -1,6 +1,6 @@
 ﻿using DataProcessor.Enums;
-using DataProcessor.FileLocations;
 using DataProcessor.FileLocations.CompanyImplementations;
+using DataProcessor.FileLocations.FileGroup;
 
 namespace DataProcessor.Strategies;
 

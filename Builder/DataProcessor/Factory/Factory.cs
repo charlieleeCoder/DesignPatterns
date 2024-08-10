@@ -2,8 +2,8 @@
 using DataProcessor.Builder;
 using DataProcessor.DocumentPipeline;
 using DataProcessor.ComponentsRequired;
-using DataProcessor.FileLocations;
 using DataProcessor.Strategies;
+using DataProcessor.FileLocations.FileGroup;
 
 namespace DataProcessor.Factory;
 

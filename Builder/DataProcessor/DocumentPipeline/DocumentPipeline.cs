@@ -6,8 +6,8 @@ using DataProcessor.Components.DataProcessors;
 using DataProcessor.Components.DataWriters;
 using DataProcessor.Components.FileSenders;
 using DataProcessor.Components.FileArchivers;
-using DataProcessor.FileLocations;
 using DataProcessor.Components.FileIdentifiers;
+using DataProcessor.FileLocations.FileGroup;
 
 namespace DataProcessor.DocumentPipeline;
 

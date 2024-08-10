@@ -1,4 +1,4 @@
-﻿using DataProcessor.FileLocations;
+﻿using DataProcessor.FileLocations.FileGroup;
 
 namespace DataProcessor.Components.FileIdentifiers;
 
